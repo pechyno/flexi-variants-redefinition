@@ -34,11 +34,14 @@ body{font-family:'Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',system
 /* ===== Deck / scaling ===== */
 #deck{position:absolute;top:50%;left:50%;width:1600px;height:900px;transform:translate(-50%,-50%);transform-origin:center;background:var(--abra-bg);box-shadow:0 12px 60px rgba(0,0,0,0.45);overflow:hidden;}
 .slide{position:absolute;inset:0;padding:44px 64px 60px;opacity:0;visibility:hidden;transition:opacity .25s ease;background:var(--abra-bg);display:flex;flex-direction:column;overflow:hidden;}
+.slide > *{flex-shrink:0;}
 .slide.dense{padding-top:34px;}
 .dense .shead{margin-bottom:12px;}
 .dense .intro{margin-bottom:10px;font-size:15px;}
 .dense td{padding:6.5px 10px;}
 .dense thead th{padding:7px 10px;}
+.xdense td{padding:5px 9px;}
+.xdense thead th{padding:6px 9px;}
 .slide.active{opacity:1;visibility:visible;z-index:2;}
 .slide.dark{background:var(--abra-dark);color:#FFFFFF;}
 
@@ -392,10 +395,10 @@ tr.grand .scname{color:#FFF;}
         <th style="width:36px;">#</th><th style="width:195px;">Scénář</th><th>Mechanismus</th><th class="num" style="width:150px;">Upside MRR</th><th class="num" style="width:105px;">MRR v ohrožení</th><th style="width:235px;">Riziko</th><th style="width:155px;">Hodnocení</th>
       </tr></thead>
       <tbody>
-        <tr class="rec"><td class="scid">A1</td><td class="scname">API až od Business</td><td>136 Basic licencí s&nbsp;API → upgrade na Business (+630&nbsp;Kč/už., 319 odhad. uživatelů); oznámit Q3, účinnost Q4 FY27, přechodová sleva 1.&nbsp;rok</td><td class="num" style="white-space:normal;"><strong>+201 tis.</strong> plný / ~170 tis. realisticky<div class="arr">≈ +2,0–2,4 M ARR</div></td><td class="num">137 tis.</td><td>Nízké (integrace = lock-in); střední iritace → předstih 3–6 měs.</td><td><span class="badge-rec">⭐ Doporučený scénář</span></td></tr>
+        <tr><td class="scid">A1</td><td class="scname">API až od Business</td><td>136 Basic licencí s&nbsp;API → upgrade na Business (+630&nbsp;Kč/už., 319 odhad. uživatelů); oznámit Q3, účinnost Q4 FY27, přechodová sleva 1.&nbsp;rok</td><td class="num" style="white-space:normal;"><strong>+201 tis.</strong> plný / ~170 tis. realisticky<div class="arr">≈ +2,0–2,4 M ARR</div></td><td class="num">137 tis.</td><td>Nízké (integrace = lock-in); střední iritace → předstih 3–6 měs.</td><td>🔍 Nezvoleno — API zůstává dostupné od Basic</td></tr>
         <tr><td class="scid">A2</td><td class="scname">Read-only API v Basic</td><td>Basic: read-only, 1&nbsp;000 req/den (reporting, export); zápis od Business</td><td class="num" style="white-space:normal;">~120–160 tis. (část báze vystačí s&nbsp;read-only)<div class="arr">≈ +1,4–1,9 M ARR</div></td><td class="num">&lt; 137 tis.</td><td>Nízké; vyžaduje vývoj rozlišení read/write</td><td>✅ Měkčí záloha</td></tr>
         <tr><td class="scid">A3</td><td class="scname">API v Basic jako placený add-on</td><td>API zůstává v&nbsp;Basic za příplatek (300–425&nbsp;Kč/měs.) bez nutnosti upgradu</td><td class="num" style="white-space:normal;">+41 tis. (300&nbsp;Kč) až +58 tis. (425&nbsp;Kč)<div class="arr">+492–696 tis. ARR</div></td><td class="num">0</td><td>Minimální</td><td>🔍 Nejnižší výnos, nulové riziko</td></tr>
-        <tr><td class="scid">A4</td><td class="scname">Restrukturalizace limitů (kombinovatelné s A1–A3)</td><td>Premium 20k → 30k/den zdarma; ceníkové add-on balíčky: +10k/den = 500&nbsp;Kč/měs., +50k/den = 2&nbsp;000&nbsp;Kč/měs.</td><td class="num" style="white-space:normal;">+30–80 tis. (nový usage-based stream nad 1&nbsp;323 API licencemi)<div class="arr">+360–960 tis. ARR</div></td><td class="num">0</td><td>Žádné</td><td>✅ <strong>Doporučeno vždy</strong></td></tr>
+        <tr class="rec"><td class="scid">A4</td><td class="scname">Restrukturalizace limitů a placených balíčků</td><td>V ceně: <strong>Basic 1&nbsp;000 / Business 5&nbsp;000 / Premium 10&nbsp;000 req/den</strong> (dnes 5/10/20 tis.). Placené balíčky — objemy sníženy na polovinu: do 25&nbsp;000/den = 1&nbsp;000&nbsp;Kč/měs. · do 50&nbsp;000 = 2&nbsp;500&nbsp;Kč/měs. · do 100&nbsp;000 = 5&nbsp;000&nbsp;Kč/měs. · nový 4.&nbsp;stupeň do 200&nbsp;000 = 10&nbsp;000&nbsp;Kč/měs. (pouze Premium)</td><td class="num" style="white-space:normal;"><strong>+30–80 tis.</strong> konzervativně; nižší limity v&nbsp;ceně přesunou část aktivních integrací do balíčků — přepočítat dle reálného trafficu<div class="arr">+0,4–1,0 M ARR (konzerv.)</div></td><td class="num">0</td><td>Snížení limitů v&nbsp;ceně dopadá i&nbsp;na stávající integrace (Premium 20k → 10k) — nutný předstih a&nbsp;přechodové období</td><td><span class="badge-rec">⭐ Doporučený scénář</span></td></tr>
       </tbody>
     </table>
   </div>
@@ -439,7 +442,7 @@ tr.grand .scname{color:#FFF;}
       </tr></thead>
       <tbody>
         <tr><td class="scid">R1</td><td class="scname">Mix: Basic nemožná · Business příplatek · Premium v ceně</td><td>134 Basic s&nbsp;RRLP → upgrade (+135 tis. při plném) nebo drop; Business beze změny; 339 Premium licencí přestane platit fee</td><td class="num" style="white-space:normal;">+54–135 tis. (dle míry upgradu 40–100&nbsp;%)<div class="arr">≈ +0,6–1,6 M ARR</div></td><td class="num"><span class="neg">−58 tis.</span><br><span style="font-weight:500;font-size:13px;">(Premium fee floor)</span></td><td>Drop riziko v&nbsp;Basic; Premium ztráta fee kompenzována retencí a&nbsp;value</td><td>🔍 Net +0 až +80 tis.</td></tr>
-        <tr><td class="scid">R2</td><td class="scname">Hotline v ceně Business i Premium, Basic bez</td><td>RRLP-lite (hotline, standardní SLA) benefitem Business+; placené zůstávají jen Priority/Premium SLA úrovně</td><td class="num" style="white-space:normal;">+135 tis. přímý (Basic upgrade) + nepřímý tah na celý Basic segment (1&nbsp;400 lic.)<div class="arr">≈ +1,6 M ARR přímý</div></td><td class="num"><span class="neg">−126 tis.</span><br><span style="font-weight:500;font-size:13px;">(Business+Premium fee floor, 739 lic.)</span></td><td>Kapacita hotline → nutná prioritizace front v&nbsp;Intercomu</td><td>🔍 Net nejistý, ale nejsilnější upgrade argument</td></tr>
+        <tr class="rejected"><td class="scid">R2</td><td class="scname">Hotline v ceně Business i Premium, Basic bez</td><td>RRLP-lite (hotline, standardní SLA) benefitem Business+; placené zůstávají jen Priority/Premium SLA úrovně</td><td class="num" style="white-space:normal;">+135 tis. přímý (Basic upgrade) + nepřímý tah na celý Basic segment (1&nbsp;400 lic.)<div class="arr">≈ +1,6 M ARR přímý</div></td><td class="num"><span class="neg">−126 tis.</span><br><span style="font-weight:500;font-size:13px;">(Business+Premium fee floor, 739 lic.)</span></td><td>Kapacita hotline → nutná prioritizace front v&nbsp;Intercomu</td><td>❌ Příliš velká ztráta fee (−126 tis./měs.)</td></tr>
         <tr><td class="scid">R3</td><td class="scname">Tierovaná RRLP (bez vazby na varianty)</td><td>Standard 171 / Priority 400 / Premium SLA 800&nbsp;Kč/měs.; dostupná všem, Basic jen Standard</td><td class="num" style="white-space:normal;">+50–150 tis. (upsell uvnitř 889 aktivních + win-back 323 prošlých)<div class="arr">≈ +0,6–1,8 M ARR</div></td><td class="num">0</td><td>Minimální; čistě cenová architektura podpory</td><td>✅ Bezpečný, nezávislý na packagingu</td></tr>
         <tr class="rec"><td class="scid">R4</td><td class="scname">Kombinace R1 + R3</td><td>Basic: RRLP nemožná (jen self-service + Fin AI lite) · Business: tierovaná RRLP za příplatek (Standard/Priority) · Premium: Standard RRLP v&nbsp;ceně + Priority za příplatek</td><td class="num" style="white-space:normal;">+135 tis. (Basic upgrade, plný) + upsell tierů; −58 tis. Premium Standard fee</td><td class="num"><span class="neg">−58 tis.</span></td><td>Drop riziko Basic zmírněno Fin AI náhradou; Premium value ↑</td><td><span class="badge-rec">⭐ Doporučený scénář</span><div style="font-weight:700;margin-top:4px;">net +80–150 tis.</div><div class="arr">net ≈ +1,0–1,8 M ARR</div></td></tr>
       </tbody>
@@ -450,7 +453,7 @@ tr.grand .scname{color:#FFF;}
 </section>
 
 <!-- ============ SLIDE 10 · Úložiště GB ============ -->
-<section class="slide dense">
+<section class="slide dense xdense">
   <div class="shead">
     <div>
       <div class="eyebrow">Oblast 7</div>
@@ -459,11 +462,11 @@ tr.grand .scname{color:#FFF;}
     <svg class="logo" width="152" height="55" viewBox="0 0 355.91 129.38" style="color:#414453;margin:-13px -19px 0 0"><use href="#logoabra"/></svg>
   </div>
 
-  <div class="intro" style="margin-bottom:12px;"><strong>Výchozí stav:</strong> 1&nbsp;GB v&nbsp;ceně každé varianty, každý další GB za 45&nbsp;Kč/měs. Overage dnes platí <strong>655 licencí</strong>, medián platby 180&nbsp;Kč/měs., celkem <strong>356&nbsp;985&nbsp;Kč MRR</strong> <span class="muted">(~3&nbsp;% celkového MRR — dnes plně neodstupňovaný, ale výnosný „skrytý" stream)</span>.</div>
+  <div class="intro" style="margin-bottom:6px;"><strong>Výchozí stav:</strong> 1&nbsp;GB v&nbsp;ceně každé varianty, každý další GB za 45&nbsp;Kč/měs. Overage dnes platí <strong>655 licencí</strong>, medián platby 180&nbsp;Kč/měs., celkem <strong>356&nbsp;985&nbsp;Kč MRR</strong> <span class="muted">(~3&nbsp;% celkového MRR — dnes plně neodstupňovaný, ale výnosný „skrytý" stream)</span>.</div>
 
-  <div class="split" style="margin-bottom:14px;">
+  <div class="split" style="margin-bottom:8px;">
     <div class="tblwrap" style="flex:1.45;">
-      <table style="font-size:14px;">
+      <table style="font-size:12px;">
         <thead><tr>
           <th>Varianta</th><th class="num">Licencí v datech</th><th class="num">Medián GB</th><th class="num">P90 GB</th><th class="num">Platí overage</th><th class="num">Overage MRR dnes</th>
         </tr></thead>
@@ -476,39 +479,41 @@ tr.grand .scname{color:#FFF;}
         </tbody>
       </table>
     </div>
-    <div class="insight-box" style="flex:1;">
-      <h4>Medián GB koreluje s variantou</h4>
-      <div class="gb-bars">
-        <div class="gb-row"><span class="gb-lbl">Basic</span><div class="gb-track"><div class="gb-fill" style="width:3.3%"></div></div><span class="gb-val">1,0&nbsp;GB</span></div>
-        <div class="gb-row"><span class="gb-lbl">Business</span><div class="gb-track"><div class="gb-fill" style="width:6.6%"></div></div><span class="gb-val">2,0&nbsp;GB</span></div>
-        <div class="gb-row"><span class="gb-lbl">Premium</span><div class="gb-track"><div class="gb-fill" style="width:19.7%"></div></div><span class="gb-val">6,0&nbsp;GB</span></div>
-        <div class="gb-row"><span class="gb-lbl">Account-office</span><div class="gb-track"><div class="gb-fill" style="width:100%"></div></div><span class="gb-val">30,5&nbsp;GB</span></div>
+    <div class="insight-box" style="flex:1;padding:10px 16px;">
+      <h4 style="margin-bottom:7px;">Medián GB koreluje s variantou</h4>
+      <div class="gb-bars" style="gap:6px;">
+        <div class="gb-row"><span class="gb-lbl">Basic</span><div class="gb-track" style="height:14px;"><div class="gb-fill" style="width:3.3%"></div></div><span class="gb-val">1,0&nbsp;GB</span></div>
+        <div class="gb-row"><span class="gb-lbl">Business</span><div class="gb-track" style="height:14px;"><div class="gb-fill" style="width:6.6%"></div></div><span class="gb-val">2,0&nbsp;GB</span></div>
+        <div class="gb-row"><span class="gb-lbl">Premium</span><div class="gb-track" style="height:14px;"><div class="gb-fill" style="width:19.7%"></div></div><span class="gb-val">6,0&nbsp;GB</span></div>
+        <div class="gb-row"><span class="gb-lbl">Account-office</span><div class="gb-track" style="height:14px;"><div class="gb-fill" style="width:100%"></div></div><span class="gb-val">30,5&nbsp;GB</span></div>
       </div>
-      <div style="font-size:12.5px;color:var(--abra-text-light);line-height:1.4;margin-top:10px;">Úložiště je přirozený kandidát na odstupňování v&nbsp;ceně varianty. Navýšení kvót „v&nbsp;ceně" = přímá ztráta overage revenue — scénáře počítají <strong style="color:var(--abra-text)">čistou deltu proti dnešku</strong>.</div>
+      <div style="font-size:11.5px;color:var(--abra-text-light);line-height:1.35;margin-top:7px;">Kandidát na odstupňování v&nbsp;ceně varianty; scénáře počítají <strong style="color:var(--abra-text)">čistou deltu proti dnešku</strong>.</div>
     </div>
   </div>
 
   <div class="tblwrap">
-    <table style="font-size:14px;">
+    <table style="font-size:12.5px;">
       <thead><tr>
-        <th style="width:34px;">#</th><th style="width:225px;">Scénář</th><th>Mechanismus</th><th class="num" style="width:115px;">Delta MRR vs. dnes</th><th class="num" style="width:105px;">Licencí přestane platit overage</th><th style="width:240px;">Riziko</th><th style="width:145px;">Hodnocení</th>
+        <th style="width:34px;">#</th><th style="width:215px;">Scénář</th><th>Mechanismus</th><th class="num" style="width:120px;">Delta MRR vs. dnes</th><th class="num" style="width:95px;">Licencí přestane platit overage</th><th style="width:230px;">Riziko</th><th style="width:140px;">Hodnocení</th>
       </tr></thead>
       <tbody>
         <tr><td class="scid">G1</td><td class="scname">Odstupňování kvót: Basic 1 / Business 2 / Premium 5 GB</td><td>Cena za další GB beze změny (45&nbsp;Kč)</td><td class="num"><span class="neg">−63 tis.</span><div class="arr neg">−756 tis. ARR</div></td><td class="num">205</td><td>Žádné zákaznické; čistá investice do hodnoty Business/Premium</td><td>🔍 Value add „za peníze" — vhodné jen jako kompenzace přesunů</td></tr>
         <tr class="rejected"><td class="scid">G2</td><td class="scname">Štědré kvóty: Basic 2 / Business 5 / Premium 10 GB</td><td>Cena beze změny (45&nbsp;Kč)</td><td class="num"><span class="neg">−126 tis.</span><div class="arr neg">≈ −1,5 M ARR</div></td><td class="num">405</td><td>Žádné zákaznické; vysoká cena za gesto</td><td>❌ Zbytečně drahé</td></tr>
         <tr><td class="scid">G3</td><td class="scname">Kvóty beze změny, cena 45 → 60 Kč/GB</td><td>Čisté zdražení overage (+33&nbsp;%); doplnit objemové balíčky (10&nbsp;GB = 400&nbsp;Kč/měs., efektivně 40&nbsp;Kč/GB) pro heavy users</td><td class="num"><strong>+119 tis.</strong><div class="arr">≈ +1,4 M ARR</div></td><td class="num">0</td><td>Zdražení dopadá na 655 platících (medián 180 → 240&nbsp;Kč/měs. — absolutně malé částky); top spotřebitelé (100+&nbsp;GB) řešit balíčky</td><td>✅ Nejvyšší výnos, ale „beru a nedávám"</td></tr>
-        <tr class="rec"><td class="scid">G4</td><td class="scname">Kombinace: kvóty Basic 2 / Business 2 / Premium 5 GB + cena 60 Kč/GB</td><td>Odstupňované kvóty jako hmatatelný benefit variant (konzistentní s&nbsp;přidáním 2&nbsp;GB do Basic), zdražení drží stream ziskový; objemové balíčky pro heavy users</td><td class="num"><strong>+33 tis.</strong><div class="arr">+396 tis. ARR</div></td><td class="num">222</td><td>Minimální — 222 licencí si polepší, zdražení cítí jen nadlimitní; Premium dostává 5&nbsp;GB jako součást posíleného balíčku (spolu se mzdami, SLA, API)</td><td><span class="badge-rec">⭐ Doporučený scénář</span></td></tr>
+        <tr><td class="scid">G4</td><td class="scname">Kombinace: kvóty Basic 2 / Business 2 / Premium 5 GB + cena 60 Kč/GB</td><td>Odstupňované kvóty jako hmatatelný benefit variant, zdražení drží stream ziskový; objemové balíčky pro heavy users</td><td class="num"><strong>+33 tis.</strong><div class="arr">+396 tis. ARR</div></td><td class="num">222</td><td>Minimální — 222 licencí si polepší, zdražení cítí jen nadlimitní</td><td>🔍 Nahrazen kombinací G5</td></tr>
+        <tr><td class="scid">G4a</td><td class="scname">Degresivní „schody" ceny dle objemu</td><td>Kvóty beze změny; cena dle vyčerpaného objemu: do 10&nbsp;GB 60&nbsp;Kč · 10–25&nbsp;GB 50&nbsp;Kč · 25–100&nbsp;GB 40&nbsp;Kč · 100+&nbsp;GB 30&nbsp;Kč/GB (nahrazuje objemové balíčky)</td><td class="num" style="white-space:normal;"><strong>≈ +60 tis.</strong> (odhad)<div class="arr">≈ +0,7 M ARR</div></td><td class="num">0</td><td>Zdražení cítí jen objem do 25&nbsp;GB; pásma nad 25&nbsp;GB jsou pod dnešními 45&nbsp;Kč — heavy users zlevní</td><td>🔍 Samostatný mezikrok — viz G5</td></tr>
+        <tr class="rec"><td class="scid">G5</td><td class="scname">Kombinace: kvóty Basic 1 / Business 2 / Premium 5 GB + schody 60/50/40/30 Kč</td><td>Odstupňované kvóty (dle G1) + degresivní cena dle G4a; férové pro heavy users bez nutnosti objemových balíčků</td><td class="num" style="white-space:normal;"><span class="neg">≈ −20 tis.</span> (−40 až ±0, odhad)<div class="arr neg">≈ −0,2 M ARR</div></td><td class="num">205</td><td>Žádné zákaznické — 205 licencí si polepší kvótou, objem nad 25&nbsp;GB zlevní; výnos streamu mírně klesá = vědomá investice do hodnoty variant</td><td><span class="badge-rec">⭐ Doporučený scénář</span></td></tr>
       </tbody>
     </table>
   </div>
 
-  <div class="callout" style="margin-top:12px;font-size:13.5px;padding:10px 18px;"><strong>Logika G4:</strong> úložiště se mění z&nbsp;plochého poplatku na <strong>tier-diferenciátor</strong> (vzor Dropbox / Google Workspace storage tiers) při zachování kladné delty. Premium kvóta 5&nbsp;GB je zároveň „dar", který komunikačně vyvažuje přesun mezd a&nbsp;šarží do Premium. Pro top spotřebitele (382&nbsp;GB max, 17&nbsp;tis. Kč/měs.) zavést objemové balíčky — udrží je v&nbsp;komfortu a&nbsp;nás v&nbsp;marži.</div>
+  <div class="callout" style="margin-top:6px;font-size:11.5px;padding:6px 14px;line-height:1.35;"><strong>Logika G5 a odhad delty:</strong> tier-diferenciátor (kvóty dle varianty) + schody místo objemových balíčků; pásma nad 25&nbsp;GB zlevňují pod dnešních 45&nbsp;Kč (top spotřebitel 382&nbsp;GB ušetří). Odhad: overage ≈ 7&nbsp;933&nbsp;GB/měs., kvóty uvolní ~1&nbsp;400&nbsp;GB (dle G1), zbytek oceněn schody dle distribuce (medián/P90) — před exekucí přepočet na per-licenčních datech.</div>
 
   <div class="sfoot">Interní podklad — Customer Success · data 06/2026</div>
 </section>
 
 <!-- ============ SLIDE 11 · Souhrn ============ -->
-<section class="slide">
+<section class="slide dense">
   <div class="shead">
     <div>
       <div class="eyebrow">Souhrn · klíčový slide</div>
@@ -517,14 +522,14 @@ tr.grand .scname{color:#FFF;}
     <svg class="logo" width="152" height="55" viewBox="0 0 355.91 129.38" style="color:#414453;margin:-13px -19px 0 0"><use href="#logoabra"/></svg>
   </div>
 
-  <div class="kpis" style="margin-bottom:14px;">
-    <div class="kpi"><div class="kv">+1&nbsp;027–1&nbsp;157 tis.</div><div class="kl">Mezisoučet packaging (realisticky) · plný +1&nbsp;230 tis. · <strong style="color:var(--abra-teal)">≈ +12,3–13,9 M Kč ARR</strong></div></div>
+  <div class="kpis" style="margin-bottom:12px;">
+    <div class="kpi"><div class="kv">+812–932 tis.</div><div class="kl">Mezisoučet packaging (realisticky) · plný +976 tis. · <strong style="color:var(--abra-teal)">≈ +9,7–11,2 M Kč ARR</strong></div></div>
     <div class="kpi steel"><div class="kv">+580–930 tis.</div><div class="kl">Cenová indexace legacy +5–8&nbsp;% · nezávislá páka · <strong style="color:var(--abra-teal)">≈ +7,0–11,2 M Kč ARR</strong></div></div>
-    <div class="kpi darkbg"><div class="kv">+1,6–2,1 M Kč MRR</div><div class="kl">CELKEM FY27 · <strong style="color:#FAA73A">+14–18&nbsp;%</strong> nad současné MRR · <strong style="color:#FAA73A">≈ +19–25 M Kč ARR</strong></div></div>
+    <div class="kpi darkbg"><div class="kv">+1,4–1,9 M Kč MRR</div><div class="kl">CELKEM FY27 · <strong style="color:#FAA73A">+12–16&nbsp;%</strong> nad současné MRR · <strong style="color:#FAA73A">≈ +17–22 M Kč ARR</strong></div></div>
   </div>
 
   <div class="tblwrap">
-    <table style="font-size:14px;">
+    <table style="font-size:13.5px;">
       <thead><tr>
         <th style="width:130px;">Oblast</th><th>Doporučený scénář</th><th class="num" style="width:115px;">Upside MRR plný</th><th class="num" style="width:200px;">Upside MRR realistický</th><th class="num" style="width:140px;">Upside ARR realistický</th><th class="num" style="width:140px;">MRR v ohrožení</th><th style="width:185px;">Načasování</th>
       </tr></thead>
@@ -533,17 +538,17 @@ tr.grand .scname{color:#FFF;}
         <tr class="zebra"><td><strong>Šarže/expirace</strong></td><td>Š1 — do Premium po opravě</td><td class="num">+22 tis.</td><td class="num"><strong>+15 tis.</strong></td><td class="num">+180 tis.</td><td class="num">73 tis.</td><td>S release opravy</td></tr>
         <tr><td><strong>Sklady (Basic)</strong></td><td>SK1 — vyřazení, nové prodeje + renewal vlna</td><td class="num">+152 tis.</td><td class="num"><strong>+100 tis.</strong></td><td class="num">≈ +1,2 M</td><td class="num">103 tis.</td><td>1.&nbsp;10.&nbsp;26 + renewaly</td></tr>
         <tr class="zebra"><td><strong>Majetek (Basic)</strong></td><td>MA3 — jen nové prodeje (báze grandfathering, bez limitu záznamů)</td><td class="num">0 z báze</td><td class="num" style="white-space:normal;"><strong>0 z báze</strong> (jen new business mix)</td><td class="num">—</td><td class="num">0</td><td>1.&nbsp;10.&nbsp;26</td></tr>
-        <tr><td><strong>API</strong></td><td>A1 + A4 — od Business + nové limity/balíčky</td><td class="num">+281 tis.</td><td class="num"><strong>+200–250 tis.</strong></td><td class="num">≈ +2,4–3,0 M</td><td class="num">137 tis.</td><td>Oznámit Q3 · účinnost Q4 FY27</td></tr>
+        <tr><td><strong>API</strong></td><td>A4 — restrukturalizace limitů (v ceně 1k/5k/10k · balíčky 25k–200k)</td><td class="num">+80 tis.*</td><td class="num"><strong>+30–80 tis.*</strong></td><td class="num">≈ +0,4–1,0 M</td><td class="num">—</td><td>Oznámit Q3 · účinnost Q4 FY27</td></tr>
         <tr class="zebra"><td><strong>RRLP</strong></td><td>R4 — Basic bez / Business tiery / Premium v ceně</td><td class="num">+135 tis.</td><td class="num" style="white-space:normal;"><strong>+80–150 tis.</strong> (net po ztrátě fee)</td><td class="num">≈ +1,0–1,8 M</td><td class="num">106 tis.</td><td>1.&nbsp;10.&nbsp;26</td></tr>
-        <tr><td><strong>Úložiště (GB)</strong></td><td>G4 — kvóty 2 / 2 / 5 GB + 60 Kč/GB + objemové balíčky</td><td class="num">+33 tis.</td><td class="num"><strong>+25–35 tis.</strong></td><td class="num">≈ +0,3–0,4 M</td><td class="num" style="white-space:normal;">— (222 licencí si polepší)</td><td>1.&nbsp;10.&nbsp;26</td></tr>
-        <tr class="subtotal"><td colspan="2"><strong>Mezisoučet packaging</strong></td><td class="num">+1&nbsp;230 tis.</td><td class="num">+1&nbsp;027–1&nbsp;157 tis.</td><td class="num">≈ +12,3–13,9 M</td><td class="num"></td><td></td></tr>
+        <tr><td><strong>Úložiště (GB)</strong></td><td>G5 — kvóty 1 / 2 / 5 GB + schody 60/50/40/30 Kč/GB</td><td class="num">≈ −20 tis.</td><td class="num" style="white-space:normal;"><strong>≈ −20 tis.</strong> (−40 až ±0)</td><td class="num">≈ −0,2 M</td><td class="num" style="white-space:normal;">— (205 licencí si polepší)</td><td>1.&nbsp;10.&nbsp;26</td></tr>
+        <tr class="subtotal"><td colspan="2"><strong>Mezisoučet packaging</strong></td><td class="num">+976 tis.</td><td class="num">+812–932 tis.</td><td class="num">≈ +9,7–11,2 M</td><td class="num"></td><td></td></tr>
         <tr><td><strong>Cenová indexace legacy +5–8&nbsp;%</strong></td><td>nezávislá páka (mimo packaging)</td><td class="num">+580–930 tis.</td><td class="num"><strong>+580–930 tis.</strong></td><td class="num">≈ +7,0–11,2 M</td><td class="num">—</td><td>Renewaly FY27</td></tr>
-        <tr class="grand"><td colspan="2"><strong>CELKEM FY27</strong></td><td class="num">až +2,2 M</td><td class="num" style="white-space:normal;"><strong>+1,6–2,1 M Kč MRR</strong> (+14–18&nbsp;% nad současné MRR)</td><td class="num">≈ +19–25 M</td><td class="num"></td><td></td></tr>
+        <tr class="grand"><td colspan="2"><strong>CELKEM FY27</strong></td><td class="num">až +1,9 M</td><td class="num" style="white-space:normal;"><strong>+1,4–1,9 M Kč MRR</strong> (+12–16&nbsp;% nad současné MRR)</td><td class="num">≈ +17–22 M</td><td class="num"></td><td></td></tr>
       </tbody>
     </table>
   </div>
 
-  <div style="font-size:12px;color:var(--abra-text-muted);margin-top:8px;line-height:1.4;">Termín 1.&nbsp;10.&nbsp;2026 je odhad. ARR = MRR&nbsp;×&nbsp;12. Souhrn zohledňuje změnu doporučení u&nbsp;Majetku (MA2&nbsp;→&nbsp;MA3): scénáře s&nbsp;limitem počtu záznamů v&nbsp;agendě se ve FY27 nezavádějí. U&nbsp;Mezd zvolen M1 — plný přesun do Premium; realistický upside uvádí plný efekt před churn rizikem (break-even churn 23&nbsp;%, MRR v&nbsp;ohrožení 2&nbsp;007 tis.).</div>
+  <div style="font-size:12px;color:var(--abra-text-muted);margin-top:8px;line-height:1.4;">Termín 1.&nbsp;10.&nbsp;2026 je odhad. ARR = MRR&nbsp;×&nbsp;12. Změny doporučení: Majetek MA3 (limity počtu záznamů se ve FY27 nezavádějí) · Mzdy M1 — realistický upside je plný efekt před churn rizikem (break-even churn 23&nbsp;%, MRR v&nbsp;ohrožení 2&nbsp;007 tis.) · *&nbsp;API A4 — konzervativní odhad, nižší limity v&nbsp;ceně potenciál zvyšují, před exekucí přepočítat dle reálného trafficu · Úložiště G5 — odhad dle distribuce objemů (detail na slidu Oblast 7).</div>
 
   <div class="sfoot">Interní podklad — Customer Success · data 06/2026</div>
 </section>
@@ -558,11 +563,11 @@ tr.grand .scname{color:#FFF;}
     <svg class="logo" width="152" height="55" viewBox="0 0 355.91 129.38" style="color:#414453;margin:-13px -19px 0 0"><use href="#logoabra"/></svg>
   </div>
 
-  <div class="rule"><span class="rnum">1</span><span><strong>Jeden zákazník = max. jedna vynucená změna ročně</strong> (stacking riziko: jen API∪RRLP v&nbsp;Basic = 239 licencí, sklad/majetek dalších 550).</span></div>
-  <div class="rule"><span class="rnum">2</span><span><strong>Grandfathering jako default</strong>, vynucení jen u&nbsp;prokazatelně sticky segmentů.</span></div>
+  <div class="rule"><span class="rnum">1</span><span><strong>Jeden zákazník = max. jedna vynucená změna ročně</strong> — vynucené vlny nyní: Mzdy do Premium (822 lic. Business) · Sklady z&nbsp;Basic (176 lic.) · RRLP v&nbsp;Basic (134 lic.); překryvy ošetřit v&nbsp;renewal plánu. Plošné úpravy (API limity, cena GB) nejsou přesun varianty, ale komunikovat společně s&nbsp;renewalem.</span></div>
+  <div class="rule"><span class="rnum">2</span><span><strong>Grandfathering jako default</strong> — výjimka Mzdy (M1): vynucení celé báze včetně mobilního pásma 1–60 mezd (206 lic., 361 tis. MRR, vysoké odchodové riziko) → doprovodit retenční nabídkou a&nbsp;přechodovou slevou.</span></div>
   <div class="rule"><span class="rnum">3</span><span><strong>Plná cenová transparentnost v&nbsp;jednom sdělení</strong> — žádný price drip; podmínky, datum účinnosti a&nbsp;grandfathering pravidla najednou.</span></div>
-  <div class="rule"><span class="rnum">4</span><span><strong>Každé odebrání vyváženo přidáním:</strong> Basic +upomínky, +2&nbsp;GB úložiště (G4), +Fin AI lite · Business +hotline argument / tiery RRLP, +1&nbsp;h konzultace ročně · Premium +5&nbsp;GB úložiště (G4), +30k API, +prioritní SLA, +business review s&nbsp;CSM.</span></div>
-  <div class="rule"><span class="rnum">5</span><span><strong>Před exekucí přepočet s&nbsp;recency filtrem</strong> (12měsíční aktivita) a&nbsp;ověření reálného API trafficu.</span></div>
+  <div class="rule"><span class="rnum">4</span><span><strong>Každé odebrání vyváženo přidáním:</strong> Basic +upomínky, +Fin AI lite (vč. AI filtrování) · Business +2&nbsp;GB úložiště (G5), tiery RRLP, +1&nbsp;h konzultace ročně · Premium +5&nbsp;GB úložiště (G5), Standard RRLP v&nbsp;ceně, +prioritní SLA, +business review s&nbsp;CSM. Pozor: snížení API limitů v&nbsp;ceně (Premium 20k&nbsp;→&nbsp;10k/den) je plošné odebrání — komunikovat s&nbsp;předstihem spolu s&nbsp;novými balíčky.</span></div>
+  <div class="rule"><span class="rnum">5</span><span><strong>Před exekucí přepočet s&nbsp;recency filtrem</strong> (12měsíční aktivita), ověření reálného API trafficu (klíčové pro limity 1k/5k/10k a&nbsp;balíčky) a&nbsp;per-licenční přepočet úložiště (schody G5).</span></div>
 
   <div class="sfoot">Interní podklad — Customer Success · data 06/2026</div>
 </section>
@@ -583,19 +588,20 @@ tr.grand .scname{color:#FFF;}
         <th style="width:255px;">Stream</th><th>Mechanismus</th><th style="width:255px;">Potenciál</th><th style="width:265px;">Stav / závislost</th>
       </tr></thead>
       <tbody>
-        <tr><td class="scname">In-app upsell engine (PQL&nbsp;→&nbsp;PQA)</td><td>Usage triggery z&nbsp;této analýzy: Basic narazí na limit majetku/skladu → nabídka Business · Business počítá 61.+ mzdu → Premium · aktivace API → Business</td><td><strong>Největší dlouhodobá páka</strong></td><td>Závislost: R&amp;D event-tracking (sdílená investice s&nbsp;Health Score)</td></tr>
+        <tr><td class="scname">In-app upsell engine (PQL&nbsp;→&nbsp;PQA)</td><td>Usage triggery z&nbsp;této analýzy: Basic poptává sklady/majetek → nabídka Business · poptávka mezd → Premium · API traffic u&nbsp;stropu denního limitu → balíček requestů nebo vyšší varianta</td><td><strong>Největší dlouhodobá páka</strong></td><td>Závislost: R&amp;D event-tracking (sdílená investice s&nbsp;Health Score)</td></tr>
         <tr class="zebra"><td class="scname">Cenová indexace legacy cen (+5–8&nbsp;%)</td><td>Navýšení legacy cen o&nbsp;5–8&nbsp;% při renewalu</td><td><strong>+580–930 tis. Kč MRR</strong></td><td>Renewaly FY27, nejnižší riziko</td></tr>
         <tr><td class="scname">Marketplace provize 15&nbsp;%</td><td>Provize 15&nbsp;% z&nbsp;GMV marketplace</td><td>Dle GMV — nejprve změřit</td><td>Kandidát FY28</td></tr>
         <tr class="zebra"><td class="scname">Monetizace Fin AI</td><td>Lite v&nbsp;Basic, full v&nbsp;Business+</td><td>Diferenciátor vůči konkurenci</td><td>Placený AI add-on jako 2.&nbsp;vlna</td></tr>
         <tr><td class="scname">Produktizované služby (Migrace S/M/L, Mzdový audit)</td><td>Fixní balíčky místo hodinovky; mzdový audit jako součást upgrade nabídky do Premium</td><td>—</td><td>Synergie se Services</td></tr>
         <tr class="zebra"><td class="scname">Roční předplatné se slevou</td><td>Sleva za roční platbu předem</td><td>Snížení churn surface + cash-flow</td><td>Změřit současnou penetraci</td></tr>
         <tr><td class="scname">E-fakturace / ViDA compliance balíček</td><td>Compliance funkcionalita jako placený balíček</td><td>Regulatorně tažený upsell</td><td>Příprava FY27, monetizace FY28</td></tr>
+        <tr class="zebra"><td class="scname">In-app AI (AI filtrování → „chat s ERP")</td><td>AI filtrování ve WUI už v&nbsp;produkci — spotřebovává tokeny, dnes bez monetizace; plánované „chatování s&nbsp;ERP": slovní prompty vrací přepočtená data, zjišťování potřebného, výhledově i&nbsp;zakládání záznamů</td><td>Nový stream — pokrytí token nákladů + marže; AI kredity jako diferenciátor variant</td><td>Filtrování live · chat s&nbsp;ERP v&nbsp;plánu · navrhnout pricing (kredity/add-on), 2.&nbsp;vlna s&nbsp;Fin AI</td></tr>
       </tbody>
     </table>
   </div>
 
   <div style="background:var(--abra-dark);color:#FFF;border-radius:12px;padding:16px 24px;font-size:16px;font-weight:600;line-height:1.45;position:relative;overflow:hidden;">
-    Packaging <strong style="color:#FAA73A;">+1,0–1,2 M</strong> · indexace <strong style="color:#FAA73A;">+0,6–0,9 M</strong> · celkem <strong style="color:#FAA73A;">+1,6–2,1 M Kč MRR (+14–18&nbsp;%)</strong>. Streamy výše jsou růst <strong>NAD</strong> tento základ.
+    Packaging <strong style="color:#FAA73A;">+0,8–0,9 M</strong> · indexace <strong style="color:#FAA73A;">+0,6–0,9 M</strong> · celkem <strong style="color:#FAA73A;">+1,4–1,9 M Kč MRR (+12–16&nbsp;%)</strong>. Streamy výše jsou růst <strong>NAD</strong> tento základ.
     <span style="position:absolute;left:0;right:0;bottom:0;height:3px;background:linear-gradient(90deg,#EA5354,#FAA73A);"></span>
   </div>
 

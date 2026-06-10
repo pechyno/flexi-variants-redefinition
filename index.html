@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Přeskládání variant ABRA Flexi — přihlášení</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --abra-red:#EA5354;
+  --abra-red-hover:#D94344;
+  --abra-dark:#343B4E;
+  --abra-text:#343B4E;
+  --abra-text-light:#6A7087;
+  --abra-bg-alt:#F5F6F9;
+  --abra-border:#E5E7EB;
+  --abra-gradient:linear-gradient(135deg,#EA5354 0%,#FAA73A 100%);
+  --shadow-card:0 2px 12px rgba(52,59,78,0.08);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  font-family:'Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+  background:linear-gradient(180deg,#F5F6F9 0%,#FFFFFF 100%);
+  color:var(--abra-text);
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+header{
+  background:var(--abra-dark);
+  padding:18px 0;
+  box-shadow:0 2px 12px rgba(0,0,0,0.15);
+}
+header .inner{max-width:1160px;margin:0 auto;padding:0 32px;display:flex;align-items:center;gap:18px;}
+header .section-name{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.75);font-weight:700;border-left:1px solid rgba(255,255,255,.25);padding-left:18px;}
+main{flex:1;display:flex;align-items:center;justify-content:center;padding:48px 24px;}
+.card{
+  background:#FFFFFF;
+  border:1px solid var(--abra-border);
+  border-radius:14px;
+  box-shadow:var(--shadow-card);
+  padding:44px 48px 40px;
+  width:100%;
+  max-width:440px;
+  position:relative;
+  overflow:hidden;
+}
+.card::after{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#EA5354,#FAA73A);}
+.eyebrow{font-size:12px;font-weight:700;color:var(--abra-red);text-transform:uppercase;letter-spacing:.15em;margin-bottom:14px;display:inline-flex;align-items:center;gap:10px;}
+.eyebrow::before{content:'';width:28px;height:2px;background:var(--abra-red);display:inline-block;}
+h1{font-size:24px;font-weight:900;letter-spacing:-.02em;line-height:1.25;margin-bottom:8px;}
+.lead{font-size:14px;font-weight:500;color:var(--abra-text-light);margin-bottom:28px;}
+label{display:block;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--abra-text-light);margin-bottom:8px;}
+input[type=password]{
+  width:100%;
+  font-family:inherit;
+  font-size:15px;
+  padding:12px 14px;
+  border:1px solid var(--abra-border);
+  border-radius:8px;
+  outline:none;
+  transition:border-color .2s;
+}
+input[type=password]:focus{border-color:var(--abra-red);}
+button{
+  width:100%;
+  margin-top:18px;
+  background:var(--abra-gradient);
+  color:#FFFFFF;
+  border:none;
+  border-radius:8px;
+  padding:13px 24px;
+  font-family:inherit;
+  font-weight:700;
+  font-size:13px;
+  text-transform:uppercase;
+  letter-spacing:.04em;
+  cursor:pointer;
+  transition:opacity .2s, transform .2s;
+}
+button:hover{opacity:.92;transform:translateY(-1px);}
+.error{
+  display:none;
+  background:rgba(234,83,84,.08);
+  border:1px solid rgba(234,83,84,.3);
+  border-radius:8px;
+  color:var(--abra-red);
+  font-size:13px;
+  font-weight:600;
+  padding:10px 14px;
+  margin-bottom:18px;
+}
+.error.show{display:block;}
+footer{padding:18px;text-align:center;font-size:12px;color:#9499AB;font-weight:500;}
+</style>
+</head>
+<body>
+<header>
+  <div class="inner">
+    <svg width="118" height="32" viewBox="38 26 280 76" xmlns="http://www.w3.org/2000/svg" aria-label="ABRA Flexi">
+      <defs>
+        <linearGradient id="lgf" x1="84.03" y1="794.2" x2="108.01" y2="752.33" gradientTransform="translate(-.76 843.7) rotate(.06) scale(1 -1)" gradientUnits="userSpaceOnUse">
+          <stop offset=".15" stop-color="#f05571"/><stop offset="1" stop-color="#faa73a"/>
+        </linearGradient>
+      </defs>
+      <g fill="#FFFFFF">
+        <path d="M133.17,49.26h5.92l10.78,30.22h-6.44l-2.23-6.52h-10.35l-2.19,6.52h-6.27l10.78-30.22ZM139.31,67.46l-3.26-9.79-3.31,9.79h6.57Z"/>
+        <path d="M152.62,49.43h11.16c3.35,0,6.14.91,7.85,2.62,1.33,1.38,2.02,3.01,2.02,5.11v.13c0,3.52-1.94,5.41-4.08,6.57,3.22,1.24,5.36,3.22,5.36,7.17v.22c0,5.41-4.33,8.24-10.86,8.24h-11.46v-30.06ZM167.51,58.27c0-2.19-1.55-3.35-4.21-3.35h-4.63v6.79h4.33c2.75,0,4.51-1.12,4.51-3.39v-.05ZM164.12,66.95h-5.45v7.04h5.58c2.79,0,4.55-1.2,4.55-3.52v-.04c0-2.15-1.59-3.48-4.68-3.48"/>
+        <path d="M179.4,49.43h11.3c3.47,0,6.27.99,8.16,2.88,1.63,1.63,2.53,3.99,2.53,6.96v.17c0,4.55-2.28,7.43-5.58,8.89l6.4,11.16h-7.13l-5.54-9.87h-3.91v9.87h-6.23v-30.05ZM190.22,64.11c3.17,0,4.89-1.8,4.89-4.51v-.04c0-3.01-1.85-4.51-5.02-4.51h-4.46v9.06h4.59Z"/>
+        <path d="M214.88,49.26h5.92l10.78,30.22h-6.44l-2.23-6.52h-10.35l-2.19,6.52h-6.27l10.78-30.22ZM221.01,67.46l-3.26-9.79-3.31,9.79h6.57Z"/>
+        <polygon points="67.53 42.62 42.67 86.11 67.49 86.13 92.34 42.65 67.53 42.62"/>
+        <path d="M309.17,79.34h2.88v-21.66h-2.88v21.66ZM308.98,52.95h3.29v-3.56h-3.29v3.56ZM291.14,57.68h-3.29l7.25,10.64-7.55,11.02h3.22l6.02-8.92,5.98,8.92h3.33l-7.63-11.06,7.33-10.6h-3.22l-5.76,8.46-5.68-8.46ZM271.88,67.32c.37-4.23,2.92-7.37,6.28-7.37,3.85,0,5.87,3.44,6.17,7.37h-12.45ZM278.61,79.84c3.67,0,6.02-1.63,7.97-4.06l-1.79-1.8c-1.57,1.84-3.44,3.06-6.1,3.06-3.44,0-6.4-2.64-6.81-7.33h15.33c.04-.38.04-.63.04-1.05,0-6.33-3.29-11.44-9.01-11.44-5.35,0-9.28,5.03-9.28,11.27v.08c0,6.7,4.34,11.27,9.65,11.27M262.46,79.34h2.88v-30.58h-2.88v30.58ZM240.02,79.34h2.95v-12.78h14.17v-3.02h-14.17v-10.47h15.86v-3.06h-18.81v29.32Z"/>
+      </g>
+      <path fill="url(#lgf)" fill-rule="evenodd" d="M93.33,44.28l24.02,41.85h-24.84l-11.45-20.36,12.28-21.49Z"/>
+    </svg>
+    <span class="section-name">Interní podklad — Customer Success</span>
+  </div>
+</header>
+
+<main>
+  <div class="card">
+    <div class="eyebrow">Chráněný obsah</div>
+    <h1>Přeskládání variant ABRA Flexi — FY27</h1>
+    <p class="lead">Pro zobrazení prezentace zadejte přístupové heslo.</p>
+    <div class="error" id="err">Nesprávné heslo. Zkuste to znovu.</div>
+    <form method="POST" action="/api/auth">
+      <label for="password">Heslo</label>
+      <input type="password" id="password" name="password" autocomplete="current-password" autofocus required>
+      <button type="submit">Otevřít prezentaci</button>
+    </form>
+  </div>
+</main>
+
+<footer>ABRA Flexi · interní materiál — neposkytujte třetím stranám</footer>
+
+<script>
+if (new URLSearchParams(window.location.search).get('error') === '1') {
+  document.getElementById('err').classList.add('show');
+}
+</script>
+</body>
+</html>

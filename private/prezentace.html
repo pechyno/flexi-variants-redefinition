@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Přeskládání variant ABRA Flexi — scénáře změn pro FY27</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --abra-red:#EA5354;
+  --abra-red-hover:#D94344;
+  --abra-dark:#343B4E;
+  --abra-dark-2:#3E445C;
+  --abra-teal:#1A9485;
+  --abra-steel:#3D5166;
+  --abra-amber:#FAA73A;
+  --abra-text:#343B4E;
+  --abra-text-light:#6A7087;
+  --abra-text-muted:#9499AB;
+  --abra-bg:#FFFFFF;
+  --abra-bg-alt:#F5F6F9;
+  --abra-border:#E5E7EB;
+  --abra-border-strong:#D1D5DB;
+  --abra-success:#10B981;
+  --abra-warn:#F59E0B;
+  --abra-gradient:linear-gradient(135deg,#EA5354 0%,#FAA73A 100%);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{height:100%;overflow:hidden;background:#232834;}
+body{font-family:'Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;color:var(--abra-text);}
+
+/* ===== Deck / scaling ===== */
+#deck{position:absolute;top:50%;left:50%;width:1600px;height:900px;transform:translate(-50%,-50%);transform-origin:center;background:var(--abra-bg);box-shadow:0 12px 60px rgba(0,0,0,0.45);overflow:hidden;}
+.slide{position:absolute;inset:0;padding:44px 64px 60px;opacity:0;visibility:hidden;transition:opacity .25s ease;background:var(--abra-bg);display:flex;flex-direction:column;overflow:hidden;}
+.slide.dense{padding-top:34px;}
+.dense .shead{margin-bottom:12px;}
+.dense .intro{margin-bottom:10px;font-size:15px;}
+.dense td{padding:6.5px 10px;}
+.dense thead th{padding:7px 10px;}
+.slide.active{opacity:1;visibility:visible;z-index:2;}
+.slide.dark{background:var(--abra-dark);color:#FFFFFF;}
+
+/* ===== Header ===== */
+.shead{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:22px;flex-shrink:0;}
+.eyebrow{font-size:12px;font-weight:700;color:var(--abra-red);text-transform:uppercase;letter-spacing:.15em;margin-bottom:10px;display:inline-flex;align-items:center;gap:10px;}
+.eyebrow::before{content:'';width:28px;height:2px;background:var(--abra-red);display:inline-block;flex-shrink:0;}
+h2{font-size:32px;font-weight:900;letter-spacing:-.02em;color:var(--abra-text);}
+.logo{display:block;}
+
+/* ===== Intro line ===== */
+.intro{font-size:16px;line-height:1.45;color:var(--abra-text);margin-bottom:16px;max-width:1380px;}
+.intro strong{font-weight:800;}
+.intro .muted{color:var(--abra-text-light);}
+
+/* ===== Tables ===== */
+.tblwrap{background:#FFF;border:1px solid var(--abra-border);border-radius:12px;overflow:hidden;}
+table{width:100%;border-collapse:collapse;font-size:16px;}
+thead th{background:var(--abra-bg-alt);font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--abra-text-light);border-bottom:2px solid var(--abra-border-strong);padding:9px 12px;text-align:left;}
+thead th.num{text-align:right;}
+td{padding:9px 12px;border-bottom:1px solid var(--abra-border);vertical-align:top;line-height:1.35;}
+tbody tr:last-child td{border-bottom:none;}
+tbody tr.zebra td{background:var(--abra-bg-alt);}
+td.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;font-weight:600;}
+td.ctr{text-align:center;}
+.scname{font-weight:800;}
+.scid{font-weight:900;color:var(--abra-text-light);}
+
+/* scenario row states */
+tr.rec td{background:rgba(234,83,84,.07) !important;}
+tr.rec td:first-child{border-left:4px solid var(--abra-red);padding-left:8px;}
+tr.rec .scname{color:var(--abra-red);}
+tr.rejected td{color:var(--abra-text-muted);}
+tr.rejected .scname{color:var(--abra-text-muted);font-weight:700;}
+tr.rejected td.num{font-weight:500;}
+.badge-rec{display:inline-block;background:var(--abra-gradient);color:#FFF;border-radius:999px;padding:2px 9px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;white-space:nowrap;}
+.neg{color:var(--abra-red);font-weight:700;}
+.pos{color:var(--abra-teal);}
+
+/* ===== KPI cards ===== */
+.kpis{display:flex;gap:16px;margin-bottom:20px;}
+.kpi{flex:1;background:#FFF;border:1px solid var(--abra-border);border-radius:12px;padding:16px 22px 14px;position:relative;overflow:hidden;}
+.kpi::after{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#EA5354,#FAA73A);}
+.kpi.teal::after{background:linear-gradient(90deg,#1A9485,#42C4B3);}
+.kpi.steel::after{background:linear-gradient(90deg,#3D5166,#607D94);}
+.kpi.darkbg{background:var(--abra-dark);border-color:var(--abra-dark);}
+.kpi .kv{font-size:28px;font-weight:900;color:var(--abra-red);letter-spacing:-.03em;line-height:1.15;}
+.kpi.teal .kv{color:var(--abra-teal);}
+.kpi.steel .kv{color:var(--abra-steel);}
+.kpi.darkbg .kv{color:#FFF;}
+.kpi .kl{font-size:12.5px;font-weight:600;color:var(--abra-text-light);margin-top:4px;line-height:1.35;}
+.kpi.darkbg .kl{color:rgba(255,255,255,.7);}
+
+/* ===== Callout ===== */
+.callout{background:#FFF;border:1px solid var(--abra-border);border-left:4px solid var(--abra-red);border-radius:12px;padding:14px 20px;font-size:15px;line-height:1.45;}
+.callout.teal{border-left-color:var(--abra-teal);background:linear-gradient(135deg,rgba(26,148,133,.04) 0%,#FFF 100%);}
+.callout.warn{border-left-color:var(--abra-warn);}
+
+/* ===== Footer / nav ===== */
+.sfoot{position:absolute;left:64px;bottom:18px;font-size:12px;font-weight:500;color:var(--abra-text-muted);z-index:5;}
+.dark .sfoot{color:rgba(255,255,255,.45);}
+#dots{position:absolute;left:50%;bottom:20px;transform:translateX(-50%);display:flex;gap:8px;z-index:20;}
+#dots span{width:9px;height:9px;border-radius:50%;background:var(--abra-border-strong);cursor:pointer;transition:all .2s;}
+#dots span.on{background:var(--abra-red);transform:scale(1.25);}
+#counter{position:absolute;right:64px;bottom:16px;font-size:13px;font-weight:700;color:var(--abra-text-muted);z-index:20;font-variant-numeric:tabular-nums;}
+#navhint{position:absolute;right:64px;bottom:38px;font-size:11px;color:var(--abra-text-muted);z-index:20;opacity:.7;}
+
+/* ===== Title slide ===== */
+.title-slide{justify-content:center;padding:0 110px;}
+.title-slide .tlogo{position:absolute;top:52px;left:110px;}
+.title-slide .eyebrow{color:var(--abra-amber);}
+.title-slide .eyebrow::before{background:var(--abra-amber);}
+.title-slide h1{font-size:62px;font-weight:900;letter-spacing:-.025em;line-height:1.08;color:#FFF;max-width:1150px;}
+.title-slide .subtitle{font-size:26px;font-weight:500;color:rgba(255,255,255,.75);margin-top:18px;}
+.title-slide .gline{width:120px;height:4px;background:var(--abra-gradient);border:none;margin:38px 0 30px;}
+.title-slide .meta{display:flex;gap:14px;align-items:center;}
+.title-badge{display:inline-block;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);color:#FFF;border-radius:999px;padding:7px 18px;font-size:13.5px;font-weight:700;letter-spacing:.04em;}
+.title-date{font-size:14px;font-weight:600;color:rgba(255,255,255,.6);}
+.title-deco{position:absolute;top:-180px;right:-180px;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(234,83,84,.18) 0%,rgba(234,83,84,0) 70%);pointer-events:none;}
+
+/* ===== Slide 2: výhrady ===== */
+.scope-notes{display:flex;gap:16px;margin-bottom:18px;}
+.scope-note{flex:1;background:var(--abra-bg-alt);border:1px solid var(--abra-border);border-radius:12px;padding:13px 18px;font-size:14.5px;line-height:1.45;}
+.scope-note strong{font-weight:800;}
+.vyhrady-title{font-size:17px;font-weight:800;margin:2px 0 12px;display:flex;align-items:center;gap:10px;}
+.vyhrady-title .wdot{width:12px;height:12px;border-radius:3px;background:var(--abra-warn);display:inline-block;}
+.vyhrada{display:flex;gap:14px;align-items:flex-start;background:#FFF;border:1px solid var(--abra-border);border-left:4px solid var(--abra-warn);border-radius:10px;padding:10px 16px;margin-bottom:9px;font-size:15px;line-height:1.42;}
+.vyhrada .vnum{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:rgba(245,158,11,.14);color:var(--abra-warn);font-size:13px;font-weight:900;display:flex;align-items:center;justify-content:center;margin-top:1px;}
+
+/* ===== Slide 3: RRLP stats ===== */
+.split{display:flex;gap:20px;align-items:flex-start;}
+.insight-box{background:#FFF;border:1px solid var(--abra-border);border-radius:12px;padding:16px 20px;}
+.insight-box h4{font-size:14px;font-weight:800;margin-bottom:10px;}
+.pen-bars{display:flex;align-items:flex-end;gap:14px;height:120px;margin-bottom:8px;}
+.pen-bar{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;}
+.pen-bar .pb-val{font-size:15px;font-weight:900;color:var(--abra-red);margin-bottom:4px;}
+.pen-bar .pb-fill{width:100%;background:var(--abra-gradient);border-radius:6px 6px 0 0;}
+.pen-bar .pb-lbl{font-size:11.5px;font-weight:700;color:var(--abra-text-light);margin-top:6px;text-transform:uppercase;letter-spacing:.04em;}
+.winback-num{font-size:34px;font-weight:900;color:var(--abra-steel);letter-spacing:-.03em;}
+
+/* ===== Slide 4: stickiness ===== */
+.stick{margin-bottom:12px;}
+.stick-bar{display:flex;height:46px;border-radius:10px;overflow:hidden;margin-bottom:6px;}
+.stick-seg{display:flex;flex-direction:column;justify-content:center;padding:0 16px;color:#FFF;}
+.stick-seg .ss-top{font-size:15px;font-weight:900;white-space:nowrap;}
+.stick-seg .ss-sub{font-size:12px;font-weight:600;opacity:.92;white-space:nowrap;}
+.stick-caps{display:flex;}
+.stick-cap{padding:2px 16px 0;font-size:12.5px;line-height:1.35;color:var(--abra-text-light);}
+.stick-cap strong{color:var(--abra-text);font-weight:800;}
+
+/* ===== Slide 10: GB bars ===== */
+.gb-bars{display:flex;flex-direction:column;gap:9px;}
+.gb-row{display:flex;align-items:center;gap:10px;font-size:13px;}
+.gb-lbl{width:118px;font-weight:700;text-align:right;color:var(--abra-text-light);flex-shrink:0;}
+.gb-track{flex:1;height:18px;background:var(--abra-bg-alt);border-radius:5px;overflow:hidden;}
+.gb-fill{height:100%;background:var(--abra-gradient);border-radius:5px;min-width:6px;}
+.gb-val{width:64px;font-weight:900;font-variant-numeric:tabular-nums;flex-shrink:0;}
+
+/* ===== Souhrn ===== */
+tr.subtotal td{background:rgba(250,167,58,.13) !important;font-weight:800;border-top:2px solid var(--abra-border-strong);}
+tr.grand td{background:var(--abra-dark) !important;color:#FFF;font-weight:800;}
+tr.grand td.num{color:#FFF;}
+tr.grand .scname{color:#FFF;}
+
+/* ===== Pravidla ===== */
+.rule{display:flex;gap:18px;align-items:flex-start;background:#FFF;border:1px solid var(--abra-border);border-radius:12px;padding:16px 22px;margin-bottom:13px;font-size:16.5px;line-height:1.5;}
+.rule .rnum{flex-shrink:0;width:38px;height:38px;border-radius:10px;background:var(--abra-gradient);color:#FFF;font-size:18px;font-weight:900;display:flex;align-items:center;justify-content:center;}
+.rule strong{font-weight:800;}
+</style>
+</head>
+<body>
+
+<svg style="position:absolute;width:0;height:0" aria-hidden="true">
+<defs>
+<linearGradient id="lgf" x1="84.03" y1="794.2" x2="108.01" y2="752.33" gradientTransform="translate(-.76 843.7) rotate(.06) scale(1 -1)" gradientUnits="userSpaceOnUse">
+  <stop offset=".15" stop-color="#f05571"/><stop offset="1" stop-color="#faa73a"/>
+</linearGradient>
+<symbol id="logoabra" viewBox="38 26 280 76">
+  <g fill="currentColor">
+    <path d="M133.17,49.26h5.92l10.78,30.22h-6.44l-2.23-6.52h-10.35l-2.19,6.52h-6.27l10.78-30.22ZM139.31,67.46l-3.26-9.79-3.31,9.79h6.57Z"/>
+    <path d="M152.62,49.43h11.16c3.35,0,6.14.91,7.85,2.62,1.33,1.38,2.02,3.01,2.02,5.11v.13c0,3.52-1.94,5.41-4.08,6.57,3.22,1.24,5.36,3.22,5.36,7.17v.22c0,5.41-4.33,8.24-10.86,8.24h-11.46v-30.06ZM167.51,58.27c0-2.19-1.55-3.35-4.21-3.35h-4.63v6.79h4.33c2.75,0,4.51-1.12,4.51-3.39v-.05ZM164.12,66.95h-5.45v7.04h5.58c2.79,0,4.55-1.2,4.55-3.52v-.04c0-2.15-1.59-3.48-4.68-3.48"/>
+    <path d="M179.4,49.43h11.3c3.47,0,6.27.99,8.16,2.88,1.63,1.63,2.53,3.99,2.53,6.96v.17c0,4.55-2.28,7.43-5.58,8.89l6.4,11.16h-7.13l-5.54-9.87h-3.91v9.87h-6.23v-30.05ZM190.22,64.11c3.17,0,4.89-1.8,4.89-4.51v-.04c0-3.01-1.85-4.51-5.02-4.51h-4.46v9.06h4.59Z"/>
+    <path d="M214.88,49.26h5.92l10.78,30.22h-6.44l-2.23-6.52h-10.35l-2.19,6.52h-6.27l10.78-30.22ZM221.01,67.46l-3.26-9.79-3.31,9.79h6.57Z"/>
+    <polygon points="67.53 42.62 42.67 86.11 67.49 86.13 92.34 42.65 67.53 42.62"/>
+    <path d="M309.17,79.34h2.88v-21.66h-2.88v21.66ZM308.98,52.95h3.29v-3.56h-3.29v3.56ZM291.14,57.68h-3.29l7.25,10.64-7.55,11.02h3.22l6.02-8.92,5.98,8.92h3.33l-7.63-11.06,7.33-10.6h-3.22l-5.76,8.46-5.68-8.46ZM271.88,67.32c.37-4.23,2.92-7.37,6.28-7.37,3.85,0,5.87,3.44,6.17,7.37h-12.45ZM278.61,79.84c3.67,0,6.02-1.63,7.97-4.06l-1.79-1.8c-1.57,1.84-3.44,3.06-6.1,3.06-3.44,0-6.4-2.64-6.81-7.33h15.33c.04-.38.04-.63.04-1.05,0-6.33-3.29-11.44-9.01-11.44-5.35,0-9.28,5.03-9.28,11.27v.08c0,6.7,4.34,11.27,9.65,11.27M262.46,79.34h2.88v-30.58h-2.88v30.58ZM240.02,79.34h2.95v-12.78h14.17v-3.02h-14.17v-10.47h15.86v-3.06h-18.81v29.32Z"/>
+  </g>
+  <path fill="url(#lgf)" fill-rule="evenodd" d="M93.33,44.28l24.02,41.85h-24.84l-11.45-20.36,12.28-21.49Z"/>
+</symbol>
+</defs>
+</svg>
+
+<div id="deck">
+
+<!-- ============ SLIDE 1 · Titulní ============ -->
+<section class="slide dark title-slide active">
+  <div class="title-deco"></div>
+  <svg class="logo tlogo" width="184" height="50" viewBox="38 26 280 76" style="color:#FFFFFF"><use href="#logoabra"/></svg>
+  <div class="eyebrow">Licenční varianty Basic · Business · Premium</div>
+  <h1>Přeskládání variant ABRA&nbsp;Flexi</h1>
+  <div class="subtitle">Scénáře změn pro FY27 — packaging a cenové páky pro růst MRR</div>
+  <hr class="gline">
+  <div class="meta">
+    <span class="title-badge">Interní podklad — Customer Success</span>
+    <span class="title-date">10. 6. 2026 · datový základ 06/2026</span>
+  </div>
+</section>
+
+<!-- ============ SLIDE 2 · Datový základ + výhrady ============ -->
+<section class="slide">
+  <div class="shead">
+    <div>
+      <div class="eyebrow">Datový základ</div>
+      <h2>Datový základ a výhrady k datům</h2>
+    </div>
+    <svg class="logo" width="118" height="32" viewBox="38 26 280 76" style="color:#414453"><use href="#logoabra"/></svg>
+  </div>
+
+  <div class="kpis">
+    <div class="kpi"><div class="kv">3&nbsp;976</div><div class="kl">licencí celkem</div></div>
+    <div class="kpi steel"><div class="kv">11&nbsp;610&nbsp;683&nbsp;Kč</div><div class="kl">celkové MRR</div></div>
+    <div class="kpi teal"><div class="kv">06/2026</div><div class="kl">stav dat</div></div>
+  </div>
+
+  <div class="scope-notes">
+    <div class="scope-note"><strong>Account-office (45 lic. / 1,74 M MRR)</strong> funkčně odpovídá Premium — z&nbsp;přesunových scénářů je vyňat.</div>
+    <div class="scope-note"><strong>763 licencí bez <code style="font-family:inherit;font-weight:700">hosting_instance</code> (on-premise, 1,75 M MRR)</strong> nemá usage data — scénáře nad bází se jich týkají jen u&nbsp;API/RRLP (tam data jsou).</div>
+  </div>
+
+  <div class="vyhrady-title"><span class="wdot"></span>Výhrady k datům — platí pro všechny scénáře</div>
+  <div class="vyhrada"><span class="vnum">1</span><span>Usage mezd/majetku/šarží je <strong>kumulativní (lifetime)</strong> — před exekucí přepočítat s&nbsp;recency filtrem 12&nbsp;měsíců; čísla jsou horní odhad dotčené báze.</span></div>
+  <div class="vyhrada"><span class="vnum">2</span><span><strong>api_licenses&nbsp;≠&nbsp;0 = API zapnuto</strong>, nikoli nutně aktivně používáno — ověřit reálný traffic.</span></div>
+  <div class="vyhrada"><span class="vnum">3</span><span>Počty uživatelů <strong>odhadnuty z&nbsp;ceny licence</strong> / ceníkové ceny varianty.</span></div>
+  <div class="vyhrada"><span class="vnum">4</span><span>RRLP poplatek známe jen jako <strong>„od 171&nbsp;Kč/měs."</strong> — ztráty z&nbsp;fee počítány tímto konzervativním floorem.</span></div>
+  <div class="vyhrada"><span class="vnum">5</span><span>Data o&nbsp;úložišti (GB) pokrývají <strong>918 licencí</strong> — předpoklad: zbytek báze využívá ≤1&nbsp;GB; 15 licencí má individuálně sjednané vyšší bezplatné kvóty (ve scénářích zachovány).</span></div>
+
+  <div class="sfoot">Interní podklad — Customer Success · data 06/2026</div>
+</section>
+
+<!-- ============ SLIDE 3 · RRLP statistika ============ -->
+<section class="slide">
+  <div class="shead">
+    <div>
+      <div class="eyebrow">Sekce 0 · Rozšířená podpora</div>
+      <h2>RRLP — detailní statistika podle variant</h2>
+    </div>
+    <svg class="logo" width="118" height="32" viewBox="38 26 280 76" style="color:#414453"><use href="#logoabra"/></svg>
+  </div>
+
+  <div class="tblwrap" style="margin-bottom:20px;">
+    <table>
+      <thead><tr>
+        <th>Varianta</th><th class="num">Licencí celkem</th><th class="num">RRLP aktivní</th><th class="num">% varianty</th><th class="num">RRLP prošlá (historicky měli)</th><th class="num">MRR licencí s aktivní RRLP</th>
+      </tr></thead>
+      <tbody>
+        <tr><td>Basic (basic2016)</td><td class="num">1&nbsp;400</td><td class="num"><strong>134</strong></td><td class="num">9,6&nbsp;%</td><td class="num">—</td><td class="num">106&nbsp;318&nbsp;Kč</td></tr>
+        <tr class="zebra"><td>Business (standard)</td><td class="num">1&nbsp;609</td><td class="num"><strong>400</strong></td><td class="num">24,9&nbsp;%</td><td class="num">—</td><td class="num">1&nbsp;138&nbsp;162&nbsp;Kč</td></tr>
+        <tr><td>Premium</td><td class="num">922</td><td class="num"><strong>339</strong></td><td class="num">36,8&nbsp;%</td><td class="num">—</td><td class="num">2&nbsp;382&nbsp;614&nbsp;Kč</td></tr>
+        <tr class="zebra"><td>Account-office</td><td class="num">45</td><td class="num"><strong>16</strong></td><td class="num">35,6&nbsp;%</td><td class="num">—</td><td class="num">594&nbsp;587&nbsp;Kč</td></tr>
+        <tr class="subtotal"><td><strong>Celkem</strong></td><td class="num">3&nbsp;976</td><td class="num">889</td><td class="num">22,4&nbsp;%</td><td class="num">323</td><td class="num">4&nbsp;221&nbsp;681&nbsp;Kč</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="split">
+    <div class="insight-box" style="flex:1.2;">
+      <h4>Penetrace RRLP roste s variantou</h4>
+      <div class="pen-bars">
+        <div class="pen-bar"><div class="pb-val">9,6&nbsp;%</div><div class="pb-fill" style="height:22%"></div><div class="pb-lbl">Basic</div></div>
+        <div class="pen-bar"><div class="pb-val">24,9&nbsp;%</div><div class="pb-fill" style="height:55%"></div><div class="pb-lbl">Business</div></div>
+        <div class="pen-bar"><div class="pb-val">36,8&nbsp;%</div><div class="pb-fill" style="height:82%"></div><div class="pb-lbl">Premium</div></div>
+      </div>
+      <div style="font-size:13.5px;color:var(--abra-text-light);line-height:1.4;">Potvrzuje, že telefonická podpora je <strong style="color:var(--abra-text)">přirozený atribut vyšších segmentů</strong>.</div>
+    </div>
+    <div class="insight-box" style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+      <h4>Win-back segment</h4>
+      <div class="winback-num">323 licencí</div>
+      <div style="font-size:14px;color:var(--abra-text-light);line-height:1.45;margin-top:6px;">má RRLP <strong style="color:var(--abra-text)">prošlou</strong> (historicky měli) = win-back segment pro Support/Sales.</div>
+    </div>
+  </div>
+
+  <div class="sfoot">Interní podklad — Customer Success · data 06/2026</div>
+</section>
+
+<!-- ============ SLIDE 4 · Mzdy ============ -->
+<section class="slide dense">
+  <div class="shead">
+    <div>
+      <div class="eyebrow">Oblast 1</div>
+      <h2>Mzdy a personalistika</h2>
+    </div>
+    <svg class="logo" width="118" height="32" viewBox="38 26 280 76" style="color:#414453"><use href="#logoabra"/></svg>
+  </div>
+
+  <div class="intro"><strong>Výchozí stav:</strong> modul ve variantě Business. Používá ho <strong>822 z&nbsp;1&nbsp;263</strong> cloudových Business licencí (65&nbsp;%), MRR dotčených <strong>2&nbsp;007 tis. Kč</strong>. Vývojově nejnákladnější modul. <span class="muted">Stickiness roste s počtem zaměstnanců a délkou mzdové historie:</span></div>
+
+  <div class="stick">
+    <div class="stick-bar">
+      <div class="stick-seg" style="width:25.1%;background:var(--abra-red);"><span class="ss-top">1–60 mezd · 206 lic.</span><span class="ss-sub">361&nbsp;324&nbsp;Kč MRR · medián 2–5 osob</span></div>
+      <div class="stick-seg" style="width:28.8%;background:var(--abra-amber);"><span class="ss-top">61–300 · 237 lic.</span><span class="ss-sub">460&nbsp;026&nbsp;Kč MRR · medián 7–12 osob</span></div>
+      <div class="stick-seg" style="width:46.1%;background:var(--abra-teal);"><span class="ss-top">301+ · 379 lic.</span><span class="ss-sub">1&nbsp;185&nbsp;983&nbsp;Kč MRR · medián 29–313 osob</span></div>
+    </div>
+    <div class="stick-caps">
+      <div class="stick-cap" style="width:25.1%;"><strong>Mobilní — riziko vysoké:</strong> reálná alternativa Pohoda / externí účetní</div>
+      <div class="stick-cap" style="width:28.8%;"><strong>Sticky — riziko nízké:</strong> odchod = projekt</div>
+      <div class="stick-cap" style="width:46.1%;"><strong>Velmi sticky — riziko minimální:</strong> mzdová agenda = operační páteř</div>
+    </div>
+  </div>
+
+  <div class="tblwrap">
+    <table style="font-size:14px;">
+      <thead><tr>
+        <th style="width:34px;">#</th><th style="width:185px;">Scénář</th><th>Mechanismus</th><th class="num" style="width:155px;">Upside MRR</th><th class="num" style="width:110px;">MRR v ohrožení</th><th style="width:220px;">Riziko</th><th style="width:150px;">Hodnocení</th>
+      </tr></thead>
+      <tbody>
+        <tr class="rejected"><td class="scid">M1</td><td class="scname">Plný přesun do Premium</td><td>Všech 822 licencí při renewalu nuceně Premium (+320&nbsp;Kč/už.)</td><td class="num">+607 tis.</td><td class="num">2&nbsp;007 tis.</td><td>Break-even churn 23&nbsp;% — mobilní segment reálně odchází</td><td>❌ Zbytečná expozice</td></tr>
+        <tr><td class="scid">M2</td><td class="scname">Jen nové prodeje</td><td>Báze plný grandfathering; od 1.&nbsp;7.&nbsp;2026 mzdy jen v&nbsp;Premium pro nové zákazníky</td><td class="num" style="white-space:normal;">0 z báze; new business mix shift (65&nbsp;% nových „mzdových" → Premium místo Business, +320&nbsp;Kč/už. navždy)</td><td class="num">0</td><td>Minimální</td><td>✅ Bezpečný základ, pomalý náběh</td></tr>
+        <tr class="rec"><td class="scid">M3</td><td class="scname">Stickiness-gated vynucení</td><td>Nové prodeje dle M2 + báze: vynucení při renewalu jen u&nbsp;pásma 61+ mezd (616 lic.); pásmo 1–60 grandfathering</td><td class="num" style="white-space:normal;"><strong>+498 tis.</strong> (61+) / +448 tis. (jen 121+, opatrnější vlna)</td><td class="num" style="white-space:normal;">1&nbsp;646 tis. (segment, který fakticky nemůže odejít)</td><td>Nízké; vyžaduje čistou komunikaci pravidel</td><td><span class="badge-rec">⭐ Doporučený scénář</span></td></tr>
+        <tr><td class="scid">M4</td><td class="scname">Mzdy jako per-employee add-on</td><td>Modul zůstává v&nbsp;Business, ale účtuje se per aktivní zaměstnanec (10–20&nbsp;Kč/zam./měs.) — model Gusto/ADP</td><td class="num" style="white-space:normal;">řádově +200–550 tis. (proxy ~40&nbsp;tis. aktivních zaměstnanců; kumulativní data → nutný přepočet)</td><td class="num">nízké (platí se za reálné použití)</td><td>Změna cenového modelu = vyšší komunikační a billingová náročnost</td><td>🔍 Strategicky nejčistší, ale FY28 téma</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sfoot">Interní podklad — Customer Success · data 06/2026</div>
+</section>
+
+<!-- ============ SLIDE 5 · Šarže ============ -->
+<section class="slide">
+  <div class="shead">
+    <div>
+      <div class="eyebrow">Oblast 2</div>
+      <h2>Šarže a expirace</h2>
+    </div>
+    <svg class="logo" width="118" height="32" viewBox="38 26 280 76" style="color:#414453"><use href="#logoabra"/></svg>
+  </div>
+
+  <div class="intro"><strong>Výchozí stav:</strong> v&nbsp;Business; používá jen <strong>20 z&nbsp;1&nbsp;263</strong> Business licencí (1,6&nbsp;%), MRR dotčených <strong>73 tis. Kč</strong>. Modul aktuálně v&nbsp;nevyhovujícím technickém stavu.</div>
+
+  <div class="tblwrap">
+    <table>
+      <thead><tr>
+        <th style="width:34px;">#</th><th style="width:215px;">Scénář</th><th>Mechanismus</th><th class="num" style="width:165px;">Upside MRR</th><th class="num" style="width:110px;">MRR v ohrožení</th><th style="width:280px;">Riziko</th><th style="width:165px;">Hodnocení</th>
+      </tr></thead>
+      <tbody>
+        <tr class="rec"><td class="scid">Š1</td><td class="scname">Přesun do Premium po opravě</td><td>Release opravené verze = vstup do Premium; báze 20 licencí grandfathering nebo měkký přechod</td><td class="num" style="white-space:normal;">+22 tis. plný / ~15 tis. realisticky</td><td class="num">73 tis.</td><td>Minimální; oprava = investice do Premium hodnoty („nová šarže-funkcionalita přichází do Premium")</td><td><span class="badge-rec">⭐ Doporučený scénář</span></td></tr>
+        <tr class="rejected"><td class="scid">Š2</td><td class="scname">Okamžitý přesun s grandfatheringem</td><td>Nové prodeje hned jen Premium, báze beze změny, oprava následně</td><td class="num">jen new business efekt</td><td class="num">0</td><td>Reputační — „dráž za rozbité" u nových zákazníků</td><td>❌ Porušuje vlastní zásadu</td></tr>
+        <tr><td class="scid">Š3</td><td class="scname">Ponechat v Business, Premium dostane nadstavbu</td><td>Základní šarže/expirace zůstávají Business; Premium získá FEFO logiku, expirační reporting a alerty</td><td class="num" style="white-space:normal;">nepřímý (posílení Premium)</td><td class="num">0</td><td>Vyžaduje dodatečný vývoj nadstavby</td><td>🔍 Alternativa, pokud oprava nabere zpoždění</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sfoot">Interní podklad — Customer Success · data 06/2026</div>
+</section>
+
+<!-- ============ SLIDE 6 · Sklady ============ -->
+<section class="slide">
+  <div class="shead">
+    <div>
+      <div class="eyebrow">Oblast 3</div>
+      <h2>Skladové hospodářství ve variantě Basic</h2>
+    </div>
+    <svg class="logo" width="118" height="32" viewBox="38 26 280 76" style="color:#414453"><use href="#logoabra"/></svg>
+  </div>
+
+  <div class="intro"><strong>Výchozí stav:</strong> sklady dostupné od Basic. Používá je <strong>176 z&nbsp;1&nbsp;227</strong> cloudových Basic licencí (14&nbsp;%), MRR dotčených <strong>103 tis. Kč</strong>. Basic je positioned pro živnostníky bez zaměstnanců — <strong>sklad je signál obchodní firmy</strong>.</div>
+
+  <div class="tblwrap">
+    <table>
+      <thead><tr>
+        <th style="width:42px;">#</th><th style="width:230px;">Scénář</th><th>Mechanismus</th><th class="num" style="width:170px;">Upside MRR</th><th class="num" style="width:110px;">MRR v ohrožení</th><th style="width:270px;">Riziko</th><th style="width:165px;">Hodnocení</th>
+      </tr></thead>
+      <tbody>
+        <tr class="rec"><td class="scid">SK1</td><td class="scname">Vyřazení z Basic — nové prodeje + renewal vlna</td><td>Od 1.&nbsp;7.&nbsp;2026 sklady od Business; báze 176 licencí při renewalu s&nbsp;6měsíčním předstihem a&nbsp;přechodovou slevou</td><td class="num" style="white-space:normal;">+152 tis. plný / <strong>~100 tis.</strong> realisticky</td><td class="num">103 tis.</td><td>Střední — srovnání ceny Basic (425&nbsp;Kč) s&nbsp;Fakturoid/iDoklad po ořezání</td><td><span class="badge-rec">⭐ Doporučený scénář</span></td></tr>
+        <tr><td class="scid">SK2</td><td class="scname">Limit místo banu</td><td>Basic: 1&nbsp;sklad / max 100 skladových karet; plné sklady od Business</td><td class="num" style="white-space:normal;">~60–100 tis. (jen nad-limitní část báze)</td><td class="num">&lt; 50 tis.</td><td>Nízké; vyžaduje vývoj enforcementu limitu</td><td>✅ Záloha, pokud SK1 narazí u vedení</td></tr>
+        <tr><td class="scid">SK3</td><td class="scname">Jen nové prodeje</td><td>Báze plný grandfathering navždy</td><td class="num">0 z báze</td><td class="num">0</td><td>Minimální</td><td>🔍 Nejměkčí varianta, nechává peníze na stole</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sfoot">Interní podklad — Customer Success · data 06/2026</div>
+</section>
+
+<!-- ============ SLIDE 7 · Majetek ============ -->
+<section class="slide">
+  <div class="shead">
+    <div>
+      <div class="eyebrow">Oblast 4</div>
+      <h2>Majetek ve variantě Basic</h2>
+    </div>
+    <svg class="logo" width="118" height="32" viewBox="38 26 280 76" style="color:#414453"><use href="#logoabra"/></svg>
+  </div>
+
+  <div class="intro"><strong>Výchozí stav:</strong> majetek dostupný od Basic. Používá ho <strong>443 z&nbsp;1&nbsp;227</strong> cloudových Basic licencí (36&nbsp;%), MRR dotčených <strong>233 tis. Kč</strong>. <strong>Medián jen 5 majetkových karet</strong> — většina jsou mikro-uživatelé (auto + notebook).</div>
+
+  <div class="tblwrap">
+    <table>
+      <thead><tr>
+        <th style="width:44px;">#</th><th style="width:200px;">Scénář</th><th>Mechanismus</th><th class="num" style="width:165px;">Upside MRR</th><th class="num" style="width:110px;">MRR v ohrožení</th><th style="width:300px;">Riziko</th><th style="width:165px;">Hodnocení</th>
+      </tr></thead>
+      <tbody>
+        <tr class="rejected"><td class="scid">MA1</td><td class="scname">Úplné vyřazení z Basic</td><td>Všech 443 licencí nuceně Business</td><td class="num">+350 tis.</td><td class="num">233 tis.</td><td>Vysoká iritace mikro-segmentu (193 licencí má ≤3 karty) — reputační riziko za minimální hodnotu</td><td>❌</td></tr>
+        <tr class="rec"><td class="scid">MA2</td><td class="scname">Limit do 5 karet zdarma</td><td>Basic: majetek do 5 karet v&nbsp;ceně; nad limit od Business. Dotčeno 210 nad-limitních licencí (122,7 tis. MRR)</td><td class="num" style="white-space:normal;"><strong>+182 tis.</strong> plný / ~150 tis. realisticky</td><td class="num">122,7 tis.</td><td>Nízké — chráněno 233 mikro-licencí; vzor „feature limits, not gates" (HubSpot/Zendesk)</td><td><span class="badge-rec">⭐ Doporučený scénář</span></td></tr>
+        <tr><td class="scid">MA3</td><td class="scname">Jen nové prodeje</td><td>Od 1.&nbsp;7.&nbsp;2026 majetek od Business pro nové; báze grandfathering</td><td class="num">0 z báze</td><td class="num">0</td><td>Minimální</td><td>🔍 Nejměkčí varianta</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sfoot">Interní podklad — Customer Success · data 06/2026</div>
+</section>
+
+<!-- ============ SLIDE 8 · API ============ -->
+<section class="slide">
+  <div class="shead">
+    <div>
+      <div class="eyebrow">Oblast 5</div>
+      <h2>API</h2>
+    </div>
+    <svg class="logo" width="118" height="32" viewBox="38 26 280 76" style="color:#414453"><use href="#logoabra"/></svg>
+  </div>
+
+  <div class="intro"><strong>Výchozí stav:</strong> API od Basic (limity 5/10/20 tis. requestů denně, přístup zpoplatněn cenou uživatelské licence). API zapnuto u&nbsp;<strong>136 z&nbsp;1&nbsp;400</strong> Basic licencí (9,7&nbsp;%), MRR dotčených <strong>137 tis. Kč</strong>.</div>
+  <div class="callout teal" style="margin-bottom:14px;"><strong>Klíčový insight:</strong> zákazník s&nbsp;API je integrovaný (e-shop, Balíkobot) — <strong>switching cost hraje pro nás</strong>, churn riziko nuceného upgradu je nízké.</div>
+
+  <div class="tblwrap">
+    <table style="font-size:15px;">
+      <thead><tr>
+        <th style="width:36px;">#</th><th style="width:195px;">Scénář</th><th>Mechanismus</th><th class="num" style="width:150px;">Upside MRR</th><th class="num" style="width:105px;">MRR v ohrožení</th><th style="width:235px;">Riziko</th><th style="width:155px;">Hodnocení</th>
+      </tr></thead>
+      <tbody>
+        <tr class="rec"><td class="scid">A1</td><td class="scname">API až od Business</td><td>136 Basic licencí s&nbsp;API → upgrade na Business (+630&nbsp;Kč/už., 319 odhad. uživatelů); oznámit Q3, účinnost Q4 FY27, přechodová sleva 1.&nbsp;rok</td><td class="num" style="white-space:normal;"><strong>+201 tis.</strong> plný / ~170 tis. realisticky</td><td class="num">137 tis.</td><td>Nízké (integrace = lock-in); střední iritace → předstih 3–6 měs.</td><td><span class="badge-rec">⭐ Doporučený scénář</span></td></tr>
+        <tr><td class="scid">A2</td><td class="scname">Read-only API v Basic</td><td>Basic: read-only, 1&nbsp;000 req/den (reporting, export); zápis od Business</td><td class="num" style="white-space:normal;">~120–160 tis. (část báze vystačí s&nbsp;read-only)</td><td class="num">&lt; 137 tis.</td><td>Nízké; vyžaduje vývoj rozlišení read/write</td><td>✅ Měkčí záloha</td></tr>
+        <tr><td class="scid">A3</td><td class="scname">API v Basic jako placený add-on</td><td>API zůstává v&nbsp;Basic za příplatek (300–425&nbsp;Kč/měs.) bez nutnosti upgradu</td><td class="num" style="white-space:normal;">+41 tis. (300&nbsp;Kč) až +58 tis. (425&nbsp;Kč)</td><td class="num">0</td><td>Minimální</td><td>🔍 Nejnižší výnos, nulové riziko</td></tr>
+        <tr><td class="scid">A4</td><td class="scname">Restrukturalizace limitů (kombinovatelné s A1–A3)</td><td>Premium 20k → 30k/den zdarma; ceníkové add-on balíčky: +10k/den = 500&nbsp;Kč/měs., +50k/den = 2&nbsp;000&nbsp;Kč/měs.</td><td class="num" style="white-space:normal;">+30–80 tis. (nový usage-based stream nad 1&nbsp;323 API licencemi)</td><td class="num">0</td><td>Žádné</td><td>✅ <strong>Doporučeno vždy</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sfoot">Interní podklad — Customer Success · data 06/2026</div>
+</section>
+
+<!-- ============ SLIDE 9 · RRLP scénáře ============ -->
+<section class="slide">
+  <div class="shead">
+    <div>
+      <div class="eyebrow">Oblast 6</div>
+      <h2>Rozšířená podpora (RRLP) — scénáře</h2>
+    </div>
+    <svg class="logo" width="118" height="32" viewBox="38 26 280 76" style="color:#414453"><use href="#logoabra"/></svg>
+  </div>
+
+  <div class="intro"><strong>Výchozí stav:</strong> RRLP jako add-on <strong>„od 171&nbsp;Kč/měs."</strong> dostupná všem variantám. Aktivní u&nbsp;<strong>889 licencí</strong> (detail v&nbsp;sekci 0). RRLP poplatek není součástí MRR v&nbsp;<code style="font-family:inherit;font-weight:700">price_czk</code> — ztráty počítány floorem 171&nbsp;Kč.</div>
+
+  <div class="tblwrap">
+    <table style="font-size:15px;">
+      <thead><tr>
+        <th style="width:36px;">#</th><th style="width:215px;">Scénář</th><th>Mechanismus</th><th class="num" style="width:155px;">Upside MRR</th><th class="num" style="width:105px;">Ztráta RRLP fee</th><th style="width:225px;">Riziko</th><th style="width:175px;">Hodnocení</th>
+      </tr></thead>
+      <tbody>
+        <tr><td class="scid">R1</td><td class="scname">Mix: Basic nemožná · Business příplatek · Premium v ceně</td><td>134 Basic s&nbsp;RRLP → upgrade (+135 tis. při plném) nebo drop; Business beze změny; 339 Premium licencí přestane platit fee</td><td class="num" style="white-space:normal;">+54–135 tis. (dle míry upgradu 40–100&nbsp;%)</td><td class="num"><span class="neg">−58 tis.</span><br><span style="font-weight:500;font-size:13px;">(Premium fee floor)</span></td><td>Drop riziko v&nbsp;Basic; Premium ztráta fee kompenzována retencí a&nbsp;value</td><td>🔍 Net +0 až +80 tis.</td></tr>
+        <tr><td class="scid">R2</td><td class="scname">Hotline v ceně Business i Premium, Basic bez</td><td>RRLP-lite (hotline, standardní SLA) benefitem Business+; placené zůstávají jen Priority/Premium SLA úrovně</td><td class="num" style="white-space:normal;">+135 tis. přímý (Basic upgrade) + nepřímý tah na celý Basic segment (1&nbsp;400 lic.)</td><td class="num"><span class="neg">−126 tis.</span><br><span style="font-weight:500;font-size:13px;">(Business+Premium fee floor, 739 lic.)</span></td><td>Kapacita hotline → nutná prioritizace front v&nbsp;Intercomu</td><td>🔍 Net nejistý, ale nejsilnější upgrade argument</td></tr>
+        <tr><td class="scid">R3</td><td class="scname">Tierovaná RRLP (bez vazby na varianty)</td><td>Standard 171 / Priority 400 / Premium SLA 800&nbsp;Kč/měs.; dostupná všem, Basic jen Standard</td><td class="num" style="white-space:normal;">+50–150 tis. (upsell uvnitř 889 aktivních + win-back 323 prošlých)</td><td class="num">0</td><td>Minimální; čistě cenová architektura podpory</td><td>✅ Bezpečný, nezávislý na packagingu</td></tr>
+        <tr class="rec"><td class="scid">R4</td><td class="scname">Kombinace R1 + R3</td><td>Basic: RRLP nemožná (jen self-service + Fin AI lite) · Business: tierovaná RRLP za příplatek (Standard/Priority) · Premium: Standard RRLP v&nbsp;ceně + Priority za příplatek</td><td class="num" style="white-space:normal;">+135 tis. (Basic upgrade, plný) + upsell tierů; −58 tis. Premium Standard fee</td><td class="num"><span class="neg">−58 tis.</span></td><td>Drop riziko Basic zmírněno Fin AI náhradou; Premium value ↑</td><td><span class="badge-rec">⭐ Doporučený scénář</span><div style="font-weight:700;margin-top:4px;">net +80–150 tis.</div></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sfoot">Interní podklad — Customer Success · data 06/2026</div>
+</section>
+
+<!-- ============ SLIDE 10 · Úložiště GB ============ -->
+<section class="slide dense">
+  <div class="shead">
+    <div>
+      <div class="eyebrow">Oblast 7</div>
+      <h2>Cloudové úložiště (GB)</h2>
+    </div>
+    <svg class="logo" width="118" height="32" viewBox="38 26 280 76" style="color:#414453"><use href="#logoabra"/></svg>
+  </div>
+
+  <div class="intro" style="margin-bottom:12px;"><strong>Výchozí stav:</strong> 1&nbsp;GB v&nbsp;ceně každé varianty, každý další GB za 45&nbsp;Kč/měs. Overage dnes platí <strong>655 licencí</strong>, medián platby 180&nbsp;Kč/měs., celkem <strong>356&nbsp;985&nbsp;Kč MRR</strong> <span class="muted">(~3&nbsp;% celkového MRR — dnes plně neodstupňovaný, ale výnosný „skrytý" stream)</span>.</div>
+
+  <div class="split" style="margin-bottom:14px;">
+    <div class="tblwrap" style="flex:1.45;">
+      <table style="font-size:14px;">
+        <thead><tr>
+          <th>Varianta</th><th class="num">Licencí v datech</th><th class="num">Medián GB</th><th class="num">P90 GB</th><th class="num">Platí overage</th><th class="num">Overage MRR dnes</th>
+        </tr></thead>
+        <tbody>
+          <tr><td>Basic (basic2016)</td><td class="num">71</td><td class="num">1,0</td><td class="num">5,0</td><td class="num">31</td><td class="num">3&nbsp;555&nbsp;Kč</td></tr>
+          <tr class="zebra"><td>Business (standard)</td><td class="num">430</td><td class="num">2,0</td><td class="num">10,0</td><td class="num">259</td><td class="num">68&nbsp;445&nbsp;Kč</td></tr>
+          <tr><td>Premium</td><td class="num">377</td><td class="num">6,0</td><td class="num">29,4</td><td class="num">329</td><td class="num">207&nbsp;270&nbsp;Kč</td></tr>
+          <tr class="zebra"><td>Account-office</td><td class="num">40</td><td class="num">30,5</td><td class="num">130,2</td><td class="num">36</td><td class="num">77&nbsp;715&nbsp;Kč</td></tr>
+          <tr class="subtotal"><td><strong>Celkem</strong></td><td class="num">918</td><td class="num">—</td><td class="num">—</td><td class="num">655</td><td class="num">356&nbsp;985&nbsp;Kč</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="insight-box" style="flex:1;">
+      <h4>Medián GB koreluje s variantou</h4>
+      <div class="gb-bars">
+        <div class="gb-row"><span class="gb-lbl">Basic</span><div class="gb-track"><div class="gb-fill" style="width:3.3%"></div></div><span class="gb-val">1,0&nbsp;GB</span></div>
+        <div class="gb-row"><span class="gb-lbl">Business</span><div class="gb-track"><div class="gb-fill" style="width:6.6%"></div></div><span class="gb-val">2,0&nbsp;GB</span></div>
+        <div class="gb-row"><span class="gb-lbl">Premium</span><div class="gb-track"><div class="gb-fill" style="width:19.7%"></div></div><span class="gb-val">6,0&nbsp;GB</span></div>
+        <div class="gb-row"><span class="gb-lbl">Account-office</span><div class="gb-track"><div class="gb-fill" style="width:100%"></div></div><span class="gb-val">30,5&nbsp;GB</span></div>
+      </div>
+      <div style="font-size:12.5px;color:var(--abra-text-light);line-height:1.4;margin-top:10px;">Úložiště je přirozený kandidát na odstupňování v&nbsp;ceně varianty. Navýšení kvót „v&nbsp;ceně" = přímá ztráta overage revenue — scénáře počítají <strong style="color:var(--abra-text)">čistou deltu proti dnešku</strong>.</div>
+    </div>
+  </div>
+
+  <div class="tblwrap">
+    <table style="font-size:14px;">
+      <thead><tr>
+        <th style="width:34px;">#</th><th style="width:225px;">Scénář</th><th>Mechanismus</th><th class="num" style="width:115px;">Delta MRR vs. dnes</th><th class="num" style="width:105px;">Licencí přestane platit overage</th><th style="width:240px;">Riziko</th><th style="width:145px;">Hodnocení</th>
+      </tr></thead>
+      <tbody>
+        <tr><td class="scid">G1</td><td class="scname">Odstupňování kvót: Basic 1 / Business 2 / Premium 5 GB</td><td>Cena za další GB beze změny (45&nbsp;Kč)</td><td class="num"><span class="neg">−63 tis.</span></td><td class="num">205</td><td>Žádné zákaznické; čistá investice do hodnoty Business/Premium</td><td>🔍 Value add „za peníze" — vhodné jen jako kompenzace přesunů</td></tr>
+        <tr class="rejected"><td class="scid">G2</td><td class="scname">Štědré kvóty: Basic 2 / Business 5 / Premium 10 GB</td><td>Cena beze změny (45&nbsp;Kč)</td><td class="num"><span class="neg">−126 tis.</span></td><td class="num">405</td><td>Žádné zákaznické; vysoká cena za gesto</td><td>❌ Zbytečně drahé</td></tr>
+        <tr><td class="scid">G3</td><td class="scname">Kvóty beze změny, cena 45 → 60 Kč/GB</td><td>Čisté zdražení overage (+33&nbsp;%); doplnit objemové balíčky (10&nbsp;GB = 400&nbsp;Kč/měs., efektivně 40&nbsp;Kč/GB) pro heavy users</td><td class="num"><strong>+119 tis.</strong></td><td class="num">0</td><td>Zdražení dopadá na 655 platících (medián 180 → 240&nbsp;Kč/měs. — absolutně malé částky); top spotřebitelé (100+&nbsp;GB) řešit balíčky</td><td>✅ Nejvyšší výnos, ale „beru a nedávám"</td></tr>
+        <tr class="rec"><td class="scid">G4</td><td class="scname">Kombinace: kvóty Basic 2 / Business 2 / Premium 5 GB + cena 60 Kč/GB</td><td>Odstupňované kvóty jako hmatatelný benefit variant (konzistentní s&nbsp;přidáním 2&nbsp;GB do Basic), zdražení drží stream ziskový; objemové balíčky pro heavy users</td><td class="num"><strong>+33 tis.</strong></td><td class="num">222</td><td>Minimální — 222 licencí si polepší, zdražení cítí jen nadlimitní; Premium dostává 5&nbsp;GB jako součást posíleného balíčku (spolu se mzdami, SLA, API)</td><td><span class="badge-rec">⭐ Doporučený scénář</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout" style="margin-top:12px;font-size:13.5px;padding:10px 18px;"><strong>Logika G4:</strong> úložiště se mění z&nbsp;plochého poplatku na <strong>tier-diferenciátor</strong> (vzor Dropbox / Google Workspace storage tiers) při zachování kladné delty. Premium kvóta 5&nbsp;GB je zároveň „dar", který komunikačně vyvažuje přesun mezd a&nbsp;šarží do Premium. Pro top spotřebitele (382&nbsp;GB max, 17&nbsp;tis. Kč/měs.) zavést objemové balíčky — udrží je v&nbsp;komfortu a&nbsp;nás v&nbsp;marži.</div>
+
+  <div class="sfoot">Interní podklad — Customer Success · data 06/2026</div>
+</section>
+
+<!-- ============ SLIDE 11 · Souhrn ============ -->
+<section class="slide">
+  <div class="shead">
+    <div>
+      <div class="eyebrow">Souhrn · klíčový slide</div>
+      <h2>Doporučené scénáře a celkový součet FY27</h2>
+    </div>
+    <svg class="logo" width="118" height="32" viewBox="38 26 280 76" style="color:#414453"><use href="#logoabra"/></svg>
+  </div>
+
+  <div class="kpis" style="margin-bottom:16px;">
+    <div class="kpi"><div class="kv">+1&nbsp;020–1&nbsp;198 tis.</div><div class="kl">Mezisoučet packaging (realisticky) · plný +1&nbsp;412 tis.</div></div>
+    <div class="kpi steel"><div class="kv">+580–930 tis.</div><div class="kl">Cenová indexace legacy +5–8&nbsp;% · nezávislá páka</div></div>
+    <div class="kpi darkbg"><div class="kv">+1,6–2,1 M Kč MRR</div><div class="kl">CELKEM FY27 · <strong style="color:#FAA73A">+14–18&nbsp;%</strong> nad současné MRR · ~19–26 M Kč ročně</div></div>
+  </div>
+
+  <div class="tblwrap">
+    <table style="font-size:14.5px;">
+      <thead><tr>
+        <th style="width:135px;">Oblast</th><th>Doporučený scénář</th><th class="num" style="width:120px;">Upside MRR plný</th><th class="num" style="width:215px;">Upside MRR realistický</th><th class="num" style="width:160px;">MRR v ohrožení</th><th style="width:215px;">Načasování</th>
+      </tr></thead>
+      <tbody>
+        <tr><td><strong>Mzdy</strong></td><td>M3 — stickiness-gated (61+ mezd) + nové prodeje</td><td class="num">+607 tis.</td><td class="num"><strong>+450–498 tis.</strong></td><td class="num" style="white-space:normal;">1&nbsp;646 tis. (velmi sticky)</td><td>Nové prodeje 1.&nbsp;7.&nbsp;26 · báze renewaly FY27</td></tr>
+        <tr class="zebra"><td><strong>Šarže/expirace</strong></td><td>Š1 — do Premium po opravě</td><td class="num">+22 tis.</td><td class="num"><strong>+15 tis.</strong></td><td class="num">73 tis.</td><td>S release opravy</td></tr>
+        <tr><td><strong>Sklady (Basic)</strong></td><td>SK1 — vyřazení, nové prodeje + renewal vlna</td><td class="num">+152 tis.</td><td class="num"><strong>+100 tis.</strong></td><td class="num">103 tis.</td><td>1.&nbsp;7.&nbsp;26 + renewaly</td></tr>
+        <tr class="zebra"><td><strong>Majetek (Basic)</strong></td><td>MA2 — limit do 5 karet</td><td class="num">+182 tis.</td><td class="num"><strong>+150 tis.</strong></td><td class="num">123 tis.</td><td>1.&nbsp;7.&nbsp;26</td></tr>
+        <tr><td><strong>API</strong></td><td>A1 + A4 — od Business + nové limity/balíčky</td><td class="num">+281 tis.</td><td class="num"><strong>+200–250 tis.</strong></td><td class="num">137 tis.</td><td>Oznámit Q3 · účinnost Q4 FY27</td></tr>
+        <tr class="zebra"><td><strong>RRLP</strong></td><td>R4 — Basic bez / Business tiery / Premium v ceně</td><td class="num">+135 tis.</td><td class="num" style="white-space:normal;"><strong>+80–150 tis.</strong> (net po ztrátě fee)</td><td class="num">106 tis.</td><td>1.&nbsp;7.&nbsp;26</td></tr>
+        <tr><td><strong>Úložiště (GB)</strong></td><td>G4 — kvóty 2 / 2 / 5 GB + 60 Kč/GB + objemové balíčky</td><td class="num">+33 tis.</td><td class="num"><strong>+25–35 tis.</strong></td><td class="num" style="white-space:normal;">— (222 licencí si polepší)</td><td>1.&nbsp;7.&nbsp;26</td></tr>
+        <tr class="subtotal"><td colspan="2"><strong>Mezisoučet packaging</strong></td><td class="num">+1&nbsp;412 tis.</td><td class="num">+1&nbsp;020–1&nbsp;198 tis.</td><td class="num"></td><td></td></tr>
+        <tr><td><strong>Cenová indexace legacy +5–8&nbsp;%</strong></td><td>nezávislá páka (mimo packaging)</td><td class="num">+580–930 tis.</td><td class="num"><strong>+580–930 tis.</strong></td><td class="num">—</td><td>Renewaly FY27</td></tr>
+        <tr class="grand"><td colspan="2"><strong>CELKEM FY27</strong></td><td class="num">až +2,3 M</td><td class="num" style="white-space:normal;"><strong>+1,6–2,1 M Kč MRR</strong> (+14–18&nbsp;% nad současné MRR; ~19–26 M Kč ročně)</td><td class="num"></td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sfoot">Interní podklad — Customer Success · data 06/2026</div>
+</section>
+
+<!-- ============ SLIDE 12 · Pravidla ============ -->
+<section class="slide">
+  <div class="shead">
+    <div>
+      <div class="eyebrow">Exekuce</div>
+      <h2>Ochranná pravidla exekuce</h2>
+    </div>
+    <svg class="logo" width="118" height="32" viewBox="38 26 280 76" style="color:#414453"><use href="#logoabra"/></svg>
+  </div>
+
+  <div class="rule"><span class="rnum">1</span><span><strong>Jeden zákazník = max. jedna vynucená změna ročně</strong> (stacking riziko: jen API∪RRLP v&nbsp;Basic = 239 licencí, sklad/majetek dalších 550).</span></div>
+  <div class="rule"><span class="rnum">2</span><span><strong>Grandfathering jako default</strong>, vynucení jen u&nbsp;prokazatelně sticky segmentů.</span></div>
+  <div class="rule"><span class="rnum">3</span><span><strong>Plná cenová transparentnost v&nbsp;jednom sdělení</strong> — žádný price drip; podmínky, datum účinnosti a&nbsp;grandfathering pravidla najednou.</span></div>
+  <div class="rule"><span class="rnum">4</span><span><strong>Každé odebrání vyváženo přidáním:</strong> Basic +upomínky, +2&nbsp;GB úložiště (G4), +Fin AI lite · Business +hotline argument / tiery RRLP, +1&nbsp;h konzultace ročně · Premium +5&nbsp;GB úložiště (G4), +30k API, +prioritní SLA, +business review s&nbsp;CSM.</span></div>
+  <div class="rule"><span class="rnum">5</span><span><strong>Před exekucí přepočet s&nbsp;recency filtrem</strong> (12měsíční aktivita) a&nbsp;ověření reálného API trafficu.</span></div>
+
+  <div class="sfoot">Interní podklad — Customer Success · data 06/2026</div>
+</section>
+
+<div id="dots"></div>
+<div id="counter">1 / 12</div>
+
+</div>
+
+<script>
+(function(){
+  var deck = document.getElementById('deck');
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var dotsEl = document.getElementById('dots');
+  var counterEl = document.getElementById('counter');
+  var cur = 0;
+
+  slides.forEach(function(_, i){
+    var d = document.createElement('span');
+    d.addEventListener('click', function(e){ e.stopPropagation(); go(i); });
+    dotsEl.appendChild(d);
+  });
+  var dots = Array.prototype.slice.call(dotsEl.children);
+
+  function go(n){
+    cur = Math.max(0, Math.min(slides.length - 1, n));
+    slides.forEach(function(s, i){ s.classList.toggle('active', i === cur); });
+    dots.forEach(function(d, i){ d.classList.toggle('on', i === cur); });
+    counterEl.textContent = (cur + 1) + ' / ' + slides.length;
+    if (history.replaceState) history.replaceState(null, '', '#' + (cur + 1));
+  }
+
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') { e.preventDefault(); go(cur + 1); }
+    else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') { e.preventDefault(); go(cur - 1); }
+    else if (e.key === 'Home') { e.preventDefault(); go(0); }
+    else if (e.key === 'End') { e.preventDefault(); go(slides.length - 1); }
+  });
+
+  deck.addEventListener('click', function(e){
+    var rect = deck.getBoundingClientRect();
+    var x = (e.clientX - rect.left) / rect.width;
+    if (x < 0.18) go(cur - 1); else go(cur + 1);
+  });
+
+  function fit(){
+    var s = Math.min(window.innerWidth / 1600, window.innerHeight / 900);
+    deck.style.transform = 'translate(-50%,-50%) scale(' + s + ')';
+  }
+  window.addEventListener('resize', fit);
+  fit();
+
+  var h = parseInt((location.hash || '').replace('#',''), 10);
+  go(!isNaN(h) && h >= 1 && h <= slides.length ? h - 1 : 0);
+})();
+</script>
+</body>
+</html>

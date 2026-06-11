@@ -52,6 +52,12 @@ body{font-family:'Montserrat',-apple-system,BlinkMacSystemFont,'Segoe UI',system
 h2{font-size:32px;font-weight:900;letter-spacing:-.02em;color:var(--abra-text);}
 .logo{display:block;}
 
+/* ===== Tržní kontext slidy ===== */
+.slide.ctx .eyebrow{color:var(--abra-steel);}
+.slide.ctx .eyebrow::before{background:var(--abra-steel);}
+.ctx-badge{display:inline-block;background:rgba(61,81,102,.12);color:var(--abra-steel);border-radius:999px;padding:3px 12px;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;margin-left:10px;vertical-align:1px;}
+.subtt{font-size:13px;font-weight:500;color:var(--abra-text-muted);margin-top:5px;}
+
 /* ===== Intro line ===== */
 .intro{font-size:16px;line-height:1.45;color:var(--abra-text);margin-bottom:16px;max-width:1380px;}
 .intro strong{font-weight:800;}
@@ -296,6 +302,41 @@ tr.grand .scname{color:#FFF;}
   <div class="sfoot">Interní podklad — Customer Success · data 06/2026</div>
 </section>
 
+<!-- ============ SLIDE · Tržní kontext: Mzdy / ABRA Gen ============ -->
+<section class="slide ctx dense">
+  <div class="shead">
+    <div>
+      <div class="eyebrow">Oblast 1 · Benchmark<span class="ctx-badge">Tržní kontext</span></div>
+      <h2>Mzdy — tržní kontext: ABRA Gen + read-only uživatelé</h2>
+      <div class="subtt">Interní benchmark — předplatné ABRA Gen/Flores (abra.eu, 06/2026)</div>
+    </div>
+    <svg class="logo" width="152" height="55" viewBox="0 0 355.91 129.38" style="color:#414453;margin:-13px -19px 0 0"><use href="#logoabra"/></svg>
+  </div>
+
+  <div class="tblwrap" style="margin-bottom:12px;">
+    <table style="font-size:13.5px;">
+      <thead><tr>
+        <th style="width:240px;">Jak řeší tiery ABRA Gen</th><th>Basic</th><th>Standard</th><th>Premium</th>
+      </tr></thead>
+      <tbody>
+        <tr><td><strong>Mzdy a personalistika</strong></td><td>do 20 poměrů</td><td>do 100 poměrů</td><td>neomezeně</td></tr>
+        <tr class="zebra"><td><strong>Hotline</strong></td><td>pouze písemná</td><td>písemná + telefonní</td><td>přednostní odbavení</td></tr>
+        <tr><td><strong>API</strong></td><td>—</td><td>API pro běžné využití</td><td>bez omezení</td></tr>
+        <tr class="zebra"><td><strong>Read-only uživatelé</strong></td><td>—</td><td>2 v ceně</td><td>5 v ceně</td></tr>
+        <tr><td><strong>Počet firem (IČO)</strong></td><td>1</td><td>5</td><td>neomezeně</td></tr>
+        <tr class="zebra"><td><strong>Max. uživatelů</strong></td><td>5</td><td>20</td><td>neomezeně</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="split">
+    <div class="callout" style="flex:1;font-size:13.5px;line-height:1.5;"><strong>Gen nepřesouvá mzdy mezi tiery — limituje POČET POMĚRŮ.</strong> Pro Flexi z&nbsp;toho plyne kandidátní scénář <strong>M5</strong>: mzdy zůstávají v&nbsp;Business do limitu (např. 25 zaměstnanců), nad limit Premium. Mobilní mikro-segment (235 lic.) nemá důvod k&nbsp;churnu, sticky segment limit přirozeně překračuje. Interně konzistentní s&nbsp;portfoliem ABRA — k&nbsp;diskuzi vedle M1.</div>
+    <div class="callout warn" style="flex:1.1;font-size:13.5px;line-height:1.5;"><strong>Nové zjištění: read-only uživatelé.</strong> Flexi dnes: <strong>NEOMEZENÝ počet RO uživatelů zdarma</strong> ve všech variantách — celkem ~11&nbsp;000 RO uživatelů napříč licencemi. Gen model: 0 / 2 / 5 v&nbsp;ceně dle tieru, další za příplatek. Teoretický strop monetizace při ~99&nbsp;Kč/RO&nbsp;už./měs. je ~1,1&nbsp;M&nbsp;Kč MRR; realisticky po kvótách zdarma a&nbsp;deaktivacích řádově <strong>110–220 tis. Kč MRR</strong>. ⚠ Vyžaduje datovou analýzu rozložení RO uživatelů po licencích a&nbsp;variantách — kandidát na samostatnou oblast č.&nbsp;8.</div>
+  </div>
+
+  <div class="sfoot">Interní podklad — Customer Success · data 06/2026</div>
+</section>
+
 <!-- ============ SLIDE 5 · Šarže ============ -->
 <section class="slide">
   <div class="shead">
@@ -403,6 +444,38 @@ tr.grand .scname{color:#FFF;}
   <div class="sfoot">Interní podklad — Customer Success · data 06/2026</div>
 </section>
 
+<!-- ============ SLIDE · Tržní kontext: Basic vs. konkurence ============ -->
+<section class="slide ctx dense">
+  <div class="shead">
+    <div>
+      <div class="eyebrow">Oblasti 3–4 · Benchmark<span class="ctx-badge">Tržní kontext</span></div>
+      <h2>Basic vs. konkurence — tržní kontext (sklady &amp; majetek)</h2>
+      <div class="subtt">Fakturační nástroje CZ/SK v cenové relaci Basic ~425 Kč/měs.; ceny bez DPH, 06/2026</div>
+    </div>
+    <svg class="logo" width="152" height="55" viewBox="0 0 355.91 129.38" style="color:#414453;margin:-13px -19px 0 0"><use href="#logoabra"/></svg>
+  </div>
+
+  <div class="tblwrap" style="margin-bottom:12px;">
+    <table style="font-size:13.5px;">
+      <thead><tr>
+        <th style="width:170px;">Nástroj</th><th style="width:230px;">Tarif u ~425 Kč</th><th class="ctr" style="text-align:center;">Jednoduchý sklad</th><th class="ctr" style="text-align:center;">Skladové hospodářství (doklady, ocenění, inventury)</th><th class="ctr" style="text-align:center;">Majetek (odpisy)</th><th class="ctr" style="text-align:center;">Podvojné účetnictví</th>
+      </tr></thead>
+      <tbody>
+        <tr><td><strong>Fakturoid</strong></td><td>Na maximum 393–429 Kč</td><td class="ctr">✅</td><td class="ctr">❌</td><td class="ctr">❌</td><td class="ctr">❌</td></tr>
+        <tr class="zebra"><td><strong>iDoklad</strong></td><td>placené od 187 Kč</td><td class="ctr">✅</td><td class="ctr">❌</td><td class="ctr">❌</td><td class="ctr">❌</td></tr>
+        <tr><td><strong>SuperFaktura</strong></td><td>Základ 129 / Standard 279 Kč</td><td class="ctr">✅ (i v nejlevnějším)</td><td class="ctr">❌</td><td class="ctr">❌</td><td class="ctr">❌</td></tr>
+        <tr class="zebra"><td><strong>Vyfakturuj</strong></td><td>Mini 175 / Ideal 299 / Profi 620 Kč</td><td class="ctr">❌ (jen ceník)</td><td class="ctr">❌</td><td class="ctr">❌</td><td class="ctr">❌</td></tr>
+        <tr class="rec"><td><strong>ABRA Flexi Basic</strong></td><td><strong>425 Kč</strong></td><td class="ctr"><strong>✅</strong></td><td class="ctr"><strong>✅ (dnes)</strong></td><td class="ctr"><strong>✅ (dnes)</strong></td><td class="ctr"><strong>✅</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout teal" style="margin-bottom:10px;font-size:13.5px;line-height:1.5;"><strong>MAJETEK:</strong> vyřazení z&nbsp;Basic je plně v&nbsp;souladu s&nbsp;trhem — evidenci majetku s&nbsp;odpisy nenabízí v&nbsp;této cenové relaci nikdo. Konkurenční riziko scénáře MA1 je nulové; zbývá pouze interní churn riziko (řešeno komunikací a&nbsp;předstihem).</div>
+  <div class="callout warn" style="font-size:13.5px;line-height:1.5;"><strong>SKLADY:</strong> jednoduchá skladová evidence (položky + stavy) je v&nbsp;této ceně tržní standard — Fakturoid ji má za 429&nbsp;Kč, SuperFaktura za 129&nbsp;Kč. Plnohodnotné skladové hospodářství ERP typu nemá nikdo. <strong>Riziko SK1:</strong> Basic bez jakéhokoli skladu za 425&nbsp;Kč stojí obsahově POD Fakturoidem za 429&nbsp;Kč. <strong>Mitigace:</strong> v&nbsp;komunikaci a&nbsp;positioningu opřít Basic o&nbsp;podvojné účetnictví (unikát v&nbsp;segmentu) a&nbsp;zvážit ponechání jednoduché evidence zásob jako odlišení skladové EVIDENCE od skladového HOSPODÁŘSTVÍ — bez zavádění početních limitů.</div>
+
+  <div class="sfoot">Interní podklad — Customer Success · data 06/2026</div>
+</section>
+
 <!-- ============ SLIDE 8 · API ============ -->
 <section class="slide">
   <div class="shead">
@@ -480,6 +553,39 @@ tr.grand .scname{color:#FFF;}
   </div>
 
   <div style="font-size:11px;color:var(--abra-text-muted);margin-top:5px;line-height:1.35;">Fee model: odhad — současná RRLP ≈ 10&nbsp;% ceny licence (floor 171&nbsp;Kč). Před finálním rozhodnutím nahradit skutečnými fee z&nbsp;billingu. · On-prem: hodnoty „z&nbsp;toho" jsou již součástí hlavního Upside (přímý výpočet z&nbsp;plné licenční báze, ✓&nbsp;=&nbsp;z&nbsp;licenčních dat); vynucení u&nbsp;on-prem probíhá při obnově maintenance.</div>
+
+  <div class="sfoot">Interní podklad — Customer Success · data 06/2026</div>
+</section>
+
+<!-- ============ SLIDE · Tržní kontext: RRLP benchmark ============ -->
+<section class="slide ctx dense">
+  <div class="shead">
+    <div>
+      <div class="eyebrow">Oblast 6 · Benchmark<span class="ctx-badge">Tržní kontext</span></div>
+      <h2>RRLP — tržní kontext: jak kvótují telefonickou podporu velcí hráči</h2>
+      <div class="subtt">Benchmark CZ ERP/účetní software, 06/2026</div>
+    </div>
+    <svg class="logo" width="152" height="55" viewBox="0 0 355.91 129.38" style="color:#414453;margin:-13px -19px 0 0"><use href="#logoabra"/></svg>
+  </div>
+
+  <div class="tblwrap" style="margin-bottom:12px;">
+    <table style="font-size:13.5px;">
+      <thead><tr>
+        <th style="width:260px;">Hráč</th><th>Model telefonické podpory</th>
+      </tr></thead>
+      <tbody>
+        <tr><td><strong>POHODA (Stormware)</strong></td><td>hotline v ceně ročního SERVIS, bez kvót; individuální odborné/expertní konzultace placené zvlášť</td></tr>
+        <tr class="zebra"><td><strong>Money S3 (Seyfor)</strong></td><td>10 hovorů ročně v ceně služby Aktualizace; nad rámec placená „Podpora Premium"</td></tr>
+        <tr><td><strong>Helios iNuvio (partneři Asseco)</strong></td><td>hotline placená přes systémovou podporu; rozsah pomoci ~10–15 min na požadavek</td></tr>
+        <tr class="zebra"><td><strong>DUEL (Ježek software)</strong></td><td>základní hotline zdarma pro aktuální verze; Expres linka 30 Kč/min; vzdálená správa max. 30 min/den</td></tr>
+        <tr><td><strong>ABRA Gen</strong></td><td>písemná hotline (Basic) → telefonní (Standard) → přednostní odbavení (Premium)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout" style="margin-bottom:10px;font-size:13.5px;line-height:1.5;"><strong>Kvótovaná telefonická podpora vázaná na tier je tržní standard</strong> — nikdo nedává neomezenou hotline v&nbsp;nejnižším tarifu. Jednotku „minuty / uživatel / měsíc" ale nepoužívá nikdo: trh kvótuje na <strong>LICENCI</strong> (Money: hovory/rok) nebo na <strong>HOVOR</strong> (Helios: ~15 min/požadavek).</div>
+
+  <div class="callout teal" style="font-size:13.5px;line-height:1.5;"><strong>Doporučený design kvót (k diskuzi):</strong> Basic: bez hotline (self-service + Fin AI) · Business: RRLP za příplatek, fair-use roční pool na licenci škálovaný počtem uživatelů (např. 6 hovorů + 2/uživatele ročně), interně měřeno v&nbsp;minutách (Daktela), komunikováno v&nbsp;hovorech · Premium: 2× pool + prioritní fronta · nad kvótu: placené konzultace dle ceníku Services. Roční pool místo měsíčního (sezónnost účetních), soft-limit ~15&nbsp;min/hovor jen jako interní provozní pravidlo. <strong>Per-uživatel měsíční minuty nedoporučeny:</strong> účetní složitost, „dočerpávání" minut, konflikt se sezónností.</div>
 
   <div class="sfoot">Interní podklad — Customer Success · data 06/2026</div>
 </section>
@@ -641,7 +747,7 @@ tr.grand .scname{color:#FFF;}
 </section>
 
 <div id="dots"></div>
-<div id="counter">1 / 12</div>
+<div id="counter">1 / 15</div>
 
 </div>
 

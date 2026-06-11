@@ -246,7 +246,7 @@ tr.grand .scname{color:#FFF;}
     <div class="scope-note"><strong>763 licencí bez <code style="font-family:inherit;font-weight:700">hosting_instance</code> (on-premise, 1,75 M MRR)</strong> nemá usage data — scénáře nad bází se jich týkají jen u&nbsp;API/RRLP (tam data jsou).</div>
   </div>
 
-  <div class="scope-note" style="margin-bottom:18px;"><strong>On-premise báze: 763 licencí / 1&nbsp;751&nbsp;875&nbsp;Kč MRR</strong> — Basic 173 / Business 346 / Premium 244 licencí. 72&nbsp;% on-prem MRR tvoří Premium → scénáře nad Basic/Business mají na on-prem malý dopad; hlavní hodnota segmentu je retence.</div>
+  <div class="scope-note" style="margin-bottom:18px;flex:0 0 auto;"><strong>On-premise báze: 763 licencí / 1&nbsp;751&nbsp;875&nbsp;Kč MRR</strong> — Basic 173 / Business 346 / Premium 244 licencí. 72&nbsp;% on-prem MRR tvoří Premium → scénáře nad Basic/Business mají na on-prem malý dopad; hlavní hodnota segmentu je retence.</div>
 
   <div class="vyhrady-title"><span class="wdot"></span>Výhrady k datům — platí pro všechny scénáře</div>
   <div class="vyhrada"><span class="vnum">1</span><span>Usage mezd/majetku/šarží je <strong>kumulativní (lifetime)</strong> — před exekucí přepočítat s&nbsp;recency filtrem 12&nbsp;měsíců; čísla jsou horní odhad dotčené báze.</span></div>
@@ -328,6 +328,25 @@ tr.grand .scname{color:#FFF;}
       </tbody>
     </table>
   </div>
+
+  <div style="font-size:13px;font-weight:800;color:var(--abra-text);margin-bottom:5px;">Jak řežou varianty CZ konkurenti <span style="font-weight:500;color:var(--abra-text-muted);">(desktop, jednorázová licence + roční aktualizace)</span></div>
+  <div class="tblwrap" style="margin-bottom:6px;">
+    <table style="font-size:13.5px;">
+      <thead><tr>
+        <th style="width:240px;">Hráč / varianta</th><th style="text-align:center;width:90px;">Sklady</th><th style="text-align:center;width:100px;">Mzdy</th><th style="text-align:center;width:90px;">Majetek</th><th>Poznámka</th>
+      </tr></thead>
+      <tbody>
+        <tr><td><strong>POHODA Mini / Lite</strong></td><td class="ctr">❌</td><td class="ctr">❌</td><td class="ctr">❌</td><td>základní daňová evidence, 1 firma</td></tr>
+        <tr class="zebra"><td><strong>POHODA Jazz</strong></td><td class="ctr">✅</td><td class="ctr">❌</td><td class="ctr">❌</td><td>obchodní varianta bez účetních, mzdových a majetkových agend</td></tr>
+        <tr><td><strong>POHODA Standard / Premium</strong></td><td class="ctr">✅</td><td class="ctr">✅</td><td class="ctr">✅</td><td>plné varianty</td></tr>
+        <tr class="zebra"><td><strong>Money S3 Mini / Lite</strong></td><td class="ctr">❌</td><td class="ctr">❌</td><td class="ctr">❌</td><td>Lite = limit POČTU ZÁZNAMŮ</td></tr>
+        <tr><td><strong>Money S3 Office</strong></td><td class="ctr">❌</td><td class="ctr">❌</td><td class="ctr">✅</td><td>účetnictví pro účetní firmy, bez skladů a mezd</td></tr>
+        <tr class="zebra"><td><strong>Money S3 Sklad / Premium</strong></td><td class="ctr">✅</td><td class="ctr">Premium ✅</td><td class="ctr">✅</td><td>Premium = vše, neomezeně firem</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div style="font-size:12px;color:var(--abra-text-light);line-height:1.4;margin-bottom:2px;"><strong style="color:var(--abra-text);">Vzor trhu:</strong> nízké varianty BEZ skladů a BEZ majetku jsou u CZ konkurence norma (Pohoda Mini/Lite, Money Mini) — vyřazení z Flexi Basic je v souladu s trhem ekonomických systémů, nejen fakturovátek.</div>
+  <div style="font-size:12px;color:var(--abra-text-light);line-height:1.4;margin-bottom:10px;"><strong style="color:var(--abra-text);">Money S3 Lite</strong> = precedens početních limitů záznamů u velkého CZ hráče — argument „limity nikdo nedělá" neplatí; rozhodnutí FY27 limity nezavádět tím není dotčeno, jen je to vědomá volba, ne tržní nutnost.</div>
 
   <div class="split">
     <div class="callout" style="flex:1;font-size:13.5px;line-height:1.5;"><strong>Gen nepřesouvá mzdy mezi tiery — limituje POČET POMĚRŮ.</strong> Pro Flexi z&nbsp;toho plyne kandidátní scénář <strong>M5</strong>: mzdy zůstávají v&nbsp;Business do limitu (např. 25 zaměstnanců), nad limit Premium. Mobilní mikro-segment (235 lic.) nemá důvod k&nbsp;churnu, sticky segment limit přirozeně překračuje. Interně konzistentní s&nbsp;portfoliem ABRA — k&nbsp;diskuzi vedle M1.</div>
@@ -486,7 +505,7 @@ tr.grand .scname{color:#FFF;}
     <svg class="logo" width="152" height="55" viewBox="0 0 355.91 129.38" style="color:#414453;margin:-13px -19px 0 0"><use href="#logoabra"/></svg>
   </div>
 
-  <div class="intro"><strong>Výchozí stav:</strong> API od Basic (limity 5/10/20 tis. requestů denně, přístup zpoplatněn cenou uživatelské licence). API zapnuto u&nbsp;<strong>136 z&nbsp;1&nbsp;400</strong> Basic licencí (9,7&nbsp;%), MRR dotčených <strong>137 tis. Kč</strong>.</div>
+  <div class="intro"><strong>Výchozí stav:</strong> API od Basic (limity 5/10/20 tis. requestů denně, přístup zpoplatněn cenou uživatelské licence). API zapnuto u&nbsp;<strong>136 z&nbsp;1&nbsp;400</strong> Basic licencí (9,7&nbsp;%), MRR dotčených <strong>137 tis. Kč</strong>. Celkem má API zapnuto <strong>1&nbsp;323 z&nbsp;3&nbsp;976 licencí (33,3&nbsp;%)</strong> — Basic 136 (9,7&nbsp;%) · Business 503 (31,3&nbsp;%) · Premium 639 (69,3&nbsp;%) · Account-office 45 (100&nbsp;%). <strong>Penetrace roste s&nbsp;variantou.</strong></div>
   <div class="callout teal" style="margin-bottom:14px;"><strong>Klíčový insight:</strong> zákazník s&nbsp;API je integrovaný (e-shop, Balíkobot) — <strong>switching cost hraje pro nás</strong>, churn riziko nuceného upgradu je nízké.</div>
 
   <div class="tblwrap">

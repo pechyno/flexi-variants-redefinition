@@ -152,8 +152,8 @@ tr.rejected .arr{color:var(--abra-text-muted);}
 .winback-num{font-size:34px;font-weight:900;color:var(--abra-steel);letter-spacing:-.03em;}
 
 /* ===== Slide 4: stickiness ===== */
-.stick{margin-bottom:12px;}
-.stick-bar{display:flex;height:46px;border-radius:10px;overflow:hidden;margin-bottom:6px;}
+.stick{margin-bottom:8px;}
+.stick-bar{display:flex;height:42px;border-radius:10px;overflow:hidden;margin-bottom:5px;}
 .stick-seg{display:flex;flex-direction:column;justify-content:center;padding:0 16px;color:#FFF;}
 .stick-seg .ss-top{font-size:15px;font-weight:900;white-space:nowrap;}
 .stick-seg .ss-sub{font-size:12px;font-weight:600;opacity:.92;white-space:nowrap;}
@@ -249,7 +249,7 @@ tr.grand .scname{color:#FFF;}
   <div class="scope-note" style="margin-bottom:18px;flex:0 0 auto;"><strong>On-premise báze: 763 licencí / 1&nbsp;751&nbsp;875&nbsp;Kč MRR</strong> — Basic 173 / Business 346 / Premium 244 licencí. 72&nbsp;% on-prem MRR tvoří Premium → scénáře nad Basic/Business mají na on-prem malý dopad; hlavní hodnota segmentu je retence.</div>
 
   <div class="vyhrady-title"><span class="wdot"></span>Výhrady k datům — platí pro všechny scénáře</div>
-  <div class="vyhrada"><span class="vnum">1</span><span>Usage mezd/majetku/šarží je <strong>kumulativní (lifetime)</strong> — před exekucí přepočítat s&nbsp;recency filtrem 12&nbsp;měsíců; čísla jsou horní odhad dotčené báze.</span></div>
+  <div class="vyhrada"><span class="vnum">1</span><span>Usage mezd/majetku/šarží je <strong>kumulativní (lifetime)</strong> — před exekucí přepočítat s&nbsp;recency filtrem 12&nbsp;měsíců; čísla jsou horní odhad dotčené báze — <strong>u&nbsp;MEZD již vyřešeno</strong> přepočtem na aktivitu 3/12/24 měsíců; trvá pro majetek a&nbsp;šarže.</span></div>
   <div class="vyhrada"><span class="vnum">2</span><span><strong>api_licenses&nbsp;≠&nbsp;0 = API zapnuto</strong>, nikoli nutně aktivně používáno — ověřit reálný traffic.</span></div>
   <div class="vyhrada"><span class="vnum">3</span><span>Počty uživatelů <strong>odhadnuty z&nbsp;ceny licence</strong> / ceníkové ceny varianty.</span></div>
   <div class="vyhrada"><span class="vnum">4</span><span>RRLP poplatek známe jen jako <strong>„od 171&nbsp;Kč/měs."</strong> — ztráty z&nbsp;fee počítány tímto konzervativním floorem.</span></div>
@@ -313,7 +313,7 @@ tr.grand .scname{color:#FFF;}
 </section>
 
 <!-- ============ SLIDE 3 · Mzdy ============ -->
-<section class="slide dense">
+<section class="slide dense xdense">
   <div class="shead">
     <div>
       <div class="eyebrow">Oblast 1</div>
@@ -322,36 +322,38 @@ tr.grand .scname{color:#FFF;}
     <svg class="logo" width="152" height="55" viewBox="0 0 355.91 129.38" style="color:#414453;margin:-13px -19px 0 0"><use href="#logoabra"/></svg>
   </div>
 
-  <div class="intro"><strong>Výchozí stav:</strong> modul ve variantě Business. Používá ho <strong>822 z&nbsp;1&nbsp;263</strong> cloudových Business licencí (65&nbsp;%), MRR dotčených <strong>2&nbsp;007 tis. Kč</strong>. Vývojově nejnákladnější modul. <span class="muted">Stickiness roste s počtem zaměstnanců a délkou mzdové historie.</span> Pásma počítána podle firmy s&nbsp;nejvyšším počtem mezd pod licencí (konzervativní metoda).</div>
+  <div class="intro" style="margin-bottom:6px;"><strong>Výchozí stav:</strong> modul ve variantě Business. <strong>AKTIVNĚ</strong> (mzda vypočtená v&nbsp;posledních 3&nbsp;měsících) ho používá <strong>690 z&nbsp;1&nbsp;263</strong> cloudových Business licencí (55&nbsp;%), MRR dotčených <strong>1&nbsp;751 tis. Kč</strong>. Dalších <strong>132 licencí</strong> má mzdy pouze historicky — přesun je nezasáhne. Vývojově nejnákladnější modul. Pásma počítána podle firmy s&nbsp;nejvyšším počtem mezd za poslední 3&nbsp;měsíce pod licencí.</div>
 
   <div class="stick">
     <div class="stick-bar">
-      <div class="stick-seg" style="width:28.6%;background:var(--abra-red);"><span class="ss-top">1–60 mezd · 235 lic.</span><span class="ss-sub">456&nbsp;860&nbsp;Kč MRR · medián 2 osoby</span></div>
-      <div class="stick-seg" style="width:33.9%;background:var(--abra-amber);"><span class="ss-top">61–300 · 279 lic.</span><span class="ss-sub">576&nbsp;410&nbsp;Kč MRR · medián 8 osob</span></div>
-      <div class="stick-seg" style="width:37.5%;background:var(--abra-teal);"><span class="ss-top">301+ · 308 lic.</span><span class="ss-sub">974&nbsp;063&nbsp;Kč MRR · medián 36 osob</span></div>
+      <div class="stick-seg" style="flex:565 1 0;background:var(--abra-red);"><span class="ss-top">1–60 mezd (3 měs.) · 565 lic.</span><span class="ss-sub">1&nbsp;213&nbsp;728&nbsp;Kč MRR · medián 4 osoby</span></div>
+      <div class="stick-seg" style="flex:113 1 0;min-width:235px;background:var(--abra-amber);"><span class="ss-top">61–300 · 113 lic.</span><span class="ss-sub">513&nbsp;053&nbsp;Kč MRR · medián 30 osob</span></div>
+      <div class="stick-seg" style="flex:12 1 0;min-width:200px;background:var(--abra-teal);"><span class="ss-top">301+ · 12 lic.</span><span class="ss-sub">24&nbsp;459&nbsp;Kč MRR · medián 141 osob</span></div>
     </div>
     <div class="stick-caps">
-      <div class="stick-cap" style="width:28.6%;"><strong>Mobilní — riziko vysoké:</strong> reálná alternativa Pohoda / externí účetní</div>
-      <div class="stick-cap" style="width:33.9%;"><strong>Sticky — riziko nízké:</strong> odchod = projekt</div>
-      <div class="stick-cap" style="width:37.5%;"><strong>Velmi sticky — riziko minimální:</strong> mzdová agenda = operační páteř</div>
+      <div class="stick-cap" style="flex:565 1 0;"><strong>≈ do 20 zaměstnanců:</strong> mix mikro (mobilní) a malých firem (již sticky)</div>
+      <div class="stick-cap" style="flex:113 1 0;min-width:235px;"><strong>≈ 20–100 zaměstnanců:</strong> velmi sticky — odchod = projekt</div>
+      <div class="stick-cap" style="flex:12 1 0;min-width:200px;"><strong>≈ 100+ zaměstnanců:</strong> odchod prakticky nemožný</div>
     </div>
+    <div style="font-size:11.5px;color:var(--abra-text-muted);line-height:1.35;margin-top:5px;">Aktivita v čase: 3&nbsp;měsíce = 690 licencí · 12&nbsp;měsíců = 729 · 24&nbsp;měsíců = 751 · lifetime = 822. Pozn.: 61+ mezd za 3&nbsp;měsíce odpovídá firmě s&nbsp;~20+ zaměstnanci — pásma na 3M okně měří velikost firmy, ne délku historie. Šířky pásem v&nbsp;grafu jsou orientační (oranžové 16,4&nbsp;% a&nbsp;zelené 1,7&nbsp;% zvětšeny pro čitelnost).</div>
   </div>
 
   <div class="tblwrap">
-    <table style="font-size:14px;">
+    <table style="font-size:13px;">
       <thead><tr>
         <th style="width:34px;">#</th><th style="width:185px;">Scénář</th><th>Mechanismus</th><th class="num" style="width:150px;">Upside MRR</th><th class="num" style="width:85px;">On-prem NAVÍC (odhad)</th><th class="num" style="width:105px;">MRR v ohrožení</th><th style="width:195px;">Riziko</th><th style="width:148px;">Hodnocení</th>
       </tr></thead>
       <tbody>
-        <tr class="rec"><td class="scid">M1</td><td class="scname">Plný přesun do Premium</td><td>Všech 822 licencí při renewalu nuceně Premium (+320&nbsp;Kč/už.)</td><td class="num">+607 tis.<div class="arr">≈ +7,3 M ARR</div></td><td class="num">+86 tis.</td><td class="num">2&nbsp;007 tis.</td><td>Break-even churn 23&nbsp;% — mobilní segment reálně odchází</td><td><span class="badge-rec">⭐ Doporučený scénář</span></td></tr>
+        <tr class="rec"><td class="scid">M1</td><td class="scname">Plný přesun do Premium</td><td>Všech 690 <strong>AKTIVNÍCH</strong> licencí při renewalu nuceně Premium (+320&nbsp;Kč/už.); 132 neaktivních přesun nepocítí</td><td class="num">+528 tis.<div class="arr">≈ +6,3 M ARR</div></td><td class="num">+75 tis.</td><td class="num">1&nbsp;751 tis.</td><td>Break-even churn 23&nbsp;% — mobilní segment reálně odchází; recency filtr zmenšil citlivé jádro o&nbsp;132 licencí</td><td><span class="badge-rec">⭐ Doporučený scénář</span></td></tr>
         <tr><td class="scid">M2</td><td class="scname">Jen nové prodeje</td><td>Báze plný grandfathering; od 1.&nbsp;10.&nbsp;2026 (odhad) mzdy jen v&nbsp;Premium pro nové zákazníky</td><td class="num" style="white-space:normal;">0 z báze; new business mix shift (65&nbsp;% nových „mzdových" → Premium místo Business, +320&nbsp;Kč/už. navždy)</td><td class="num">0</td><td class="num">0</td><td>Minimální</td><td>✅ Bezpečný základ, pomalý náběh</td></tr>
-        <tr><td class="scid">M3</td><td class="scname">Stickiness-gated vynucení</td><td>Nové prodeje dle M2 + báze: vynucení při renewalu jen u&nbsp;pásma 61+ mezd (587 lic.); pásmo 1–60 grandfathering</td><td class="num" style="white-space:normal;"><strong>+468 tis.</strong> (61+) / +409 tis. (jen 121+, opatrnější vlna)<div class="arr">≈ +4,9–5,6 M ARR</div></td><td class="num" style="white-space:normal;">+67 tis. (61+) / +58 tis. (121+)</td><td class="num" style="white-space:normal;">1&nbsp;550 tis. (segment, který fakticky nemůže odejít)</td><td>Nízké; vyžaduje čistou komunikaci pravidel</td><td>✅ Alternativa s nižší expozicí</td></tr>
-        <tr><td class="scid">M4</td><td class="scname">Mzdy jako per-employee add-on</td><td>Modul zůstává v&nbsp;Business, ale účtuje se per aktivní zaměstnanec (10–20&nbsp;Kč/zam./měs.) — model Gusto/ADP</td><td class="num" style="white-space:normal;">řádově +200–550 tis. (proxy ~40&nbsp;tis. aktivních zaměstnanců; kumulativní data → nutný přepočet)<div class="arr">≈ +2,4–6,6 M ARR</div></td><td class="num">+28–78 tis.</td><td class="num">nízké (platí se za reálné použití)</td><td>Změna cenového modelu = vyšší komunikační a billingová náročnost</td><td>🔍 Strategicky nejčistší, ale FY28 téma</td></tr>
+        <tr><td class="scid">M3</td><td class="scname">Stickiness-gated vynucení</td><td>Nové prodeje dle M2 + báze: vynucení při renewalu jen u&nbsp;pásma 61+ mezd za 3&nbsp;měs. (125 lic. ≈ firmy 20+ zaměstnanců); pásmo 1–60 grandfathering</td><td class="num" style="white-space:normal;"><strong>+161 tis.</strong> (61+) / +81 tis. (jen 121+, 52 lic.)<div class="arr">≈ +1,0–1,9 M ARR</div></td><td class="num" style="white-space:normal;">+22 tis. (61+) / +11 tis. (121+)</td><td class="num">538 tis.</td><td>Nízké; vyžaduje čistou komunikaci pravidel</td><td>✅ Alternativa s nižší expozicí — s&nbsp;3M pásmy zachytává jen střední firmy, nižší výnos než dříve uváděno</td></tr>
+        <tr><td class="scid">M4</td><td class="scname">Mzdy jako per-employee add-on</td><td>Modul zůstává v&nbsp;Business, ale účtuje se per aktivní zaměstnanec (10–20&nbsp;Kč/zam./měs.) — model Gusto/ADP</td><td class="num" style="white-space:normal;"><strong>+169–338 tis.</strong> (16&nbsp;879 reálně aktivních zaměstnanců s&nbsp;mzdou za 3&nbsp;měs. × 10–20&nbsp;Kč)<div class="arr">≈ +2,0–4,1 M ARR</div></td><td class="num">+24–48 tis.</td><td class="num">nízké (platí se za reálné použití)</td><td>Změna cenového modelu = vyšší komunikační a billingová náročnost</td><td>🔍 Strategicky nejčistší, ale FY28 téma</td></tr>
       </tbody>
     </table>
   </div>
 
-  <div style="font-size:11px;color:var(--abra-text-muted);margin-top:5px;line-height:1.35;">On-prem odhad: škálováno poměrem MRR on-prem/cloud dané varianty (Basic ×0,091 · Business ×0,142); předpokládá stejnou adopci featur jako v&nbsp;cloudu. U&nbsp;API a&nbsp;RRLP jde o&nbsp;přímý výpočet a&nbsp;hodnoty jsou již součástí hlavního čísla. Vynucení u&nbsp;on-prem probíhá při obnově maintenance.</div>
+  <div style="font-size:11px;color:var(--abra-text-muted);margin-top:5px;line-height:1.35;">On-prem odhad: škálováno poměrem MRR on-prem/cloud dané varianty (Basic ×0,091 · Business ×0,142); předpokládá stejnou adopci featur jako v&nbsp;cloudu. U&nbsp;API a&nbsp;RRLP jde o&nbsp;přímý výpočet a&nbsp;hodnoty jsou již součástí hlavního čísla. Vynucení u&nbsp;on-prem probíhá při obnově maintenance. Mzdová čísla nově počítána z&nbsp;aktivity za poslední 3&nbsp;měsíce (recency filtr) — výhrada ke kumulativním datům je pro tuto oblast vyřešena.</div>
+  <style>.xdense .stick-seg .ss-sub{font-size:11px;} .xdense .stick-cap{font-size:11.5px;padding-top:1px;}</style>
 
   <div class="sfoot">Interní podklad — Customer Success · data 06/2026</div>
 </section>
